@@ -7,10 +7,10 @@ const NavItems = () => {
       <ul className='flex flex-col items-center gap-4 sm:flex-row md:gap-6 relative z-20'>
         {
           navLinks.map((item) => (
-            <li key={item.id} className='text-neutral-400 hover:text-[#FEFAE0] font-generalsans max-sm:hover:bg-base-300/50 max-sm:w-full max-sm:rounded-md py-2 max-sm:px-5'>
+            <li key={item.id} className='text-neutral-400 font-generalsans max-sm:hover:bg-base-300 max-sm:w-full max-sm:rounded-md py-2 max-sm:px-5'>
               <Link 
                 to={item.href}
-                className='text-lg md:text-base transition-all'
+                className='text-lg md:text-base transition-all text-base-content hover:text-primary focus:text-primary'
               >
                 {item.name}
               </Link>
@@ -60,7 +60,7 @@ const Navbar = () => {
                 <button onClick={() => toogleMenu()} className="hover:cursor-pointer focus:outline-none sm:hidden flex"
             aria-label="Toggle menu">
                     {isOpen ? 
-                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.8" class="w-6 h-6 stroke-current">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.8" className="w-6 h-6 stroke-current">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
                       </svg>
                      : 
