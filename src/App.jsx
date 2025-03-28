@@ -1,34 +1,40 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import React, { useState, useEffect} from 'react'
 import './App.css'
+import HomeSpline from './components/Home/HomeSpline'
+import Hero from './components/Home/Hero'
+import Navbar from './components/Navbar'
+import About from './components/Home/About'
+import Footer from './components/Footer'
+import Feature from './components/Home/Feature'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [lastScroll, setLastScroll] = useState(0);
+  const scrollStep = 500; // 每次滾動的距離
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+
+      // 如果滾動超過上次紀錄的點 + 300px，則再滾動 500px
+      if (scrollY > lastScroll + 200) {
+        window.scrollTo({ top: scrollY + scrollStep, behavior: "smooth" });
+        setLastScroll(scrollY + scrollStep);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [lastScroll]);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div>
+      <Navbar />
+      <HomeSpline />
+      <Hero />
+      <About />
+      <Feature />
+      <Footer />
+    </div>
   )
 }
 
