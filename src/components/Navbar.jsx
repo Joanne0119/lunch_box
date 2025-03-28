@@ -21,7 +21,7 @@ const NavItems = () => {
     );
   };
 
-const Navbar = () => {
+const Navbar = ({theme}) => {
     const [isOpen, setIsOpen] = useState(false); //isOpen is a variable and setIsOpen is a function to change the isOpen state
     const toogleMenu = () => setIsOpen((preIsOpen) => !preIsOpen);
 
@@ -55,7 +55,13 @@ const Navbar = () => {
         <div className='max-w-7xl mx-auto'>
             <div className='flex justify-between'>
                 <Link to='/' className='font-bold text-xl transition-colors'>
-                    Logo
+                    {
+                      theme === 'caramellatte' ?
+                      <img src="assets/logoLight.png" alt="Logo" className='h-10' />
+                      :
+                      <img src="assets/logoDark.png" alt="Logo" className='h-10' />
+                    }
+                    
                 </Link>
                 <button onClick={() => toogleMenu()} className="hover:cursor-pointer focus:outline-none sm:hidden flex"
             aria-label="Toggle menu">

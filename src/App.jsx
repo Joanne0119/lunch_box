@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import './App.css'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
@@ -11,9 +11,22 @@ import Login from './pages/Login'
 import DarkmodeBtn from './components/DarkmodeBtn'
 
 function App() {
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem('theme') || 'caramellatte';
+  });
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme((prevTheme) => (prevTheme === 'caramellatte' ? 'coffee' : 'caramellatte'));
+  };
+
   return (
     <BrowserRouter>
-      <Navbar />
+      <Navbar theme={theme}/>
         <Routes >
           <Route path="/" element={<Home />} />
           <Route path="/make" element={<Make />} />
@@ -21,8 +34,8 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/login" element={<Login />} />
         </Routes>
-      <DarkmodeBtn />
-      <Footer />
+      <DarkmodeBtn toggleTheme={toggleTheme} theme={theme}/>
+      <Footer theme={theme}/>
     </BrowserRouter>
   )
 }
