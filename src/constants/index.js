@@ -1,22 +1,27 @@
 export const navLinks = [
     {
       id: 1,
-      name: 'Home',
-      href: '#home',
+      name: '首頁',
+      href: '/',
     },
     {
       id: 2,
-      name: 'About',
-      href: '#about',
+      name: '製作便當',
+      href: '/make',
     },
     {
       id: 3,
-      name: 'Projects',
-      href: '#projects',
+      name: '食品型錄',
+      href: '/catlog',
     },
     {
       id: 4,
-      name: 'Contact',
-      href: '#contact',
+      name: '個人頁面',
+      href: '/profile',
     },
+    {
+        id: 5,
+        name: '登入',
+        href: '/login',
+    }
   ];
