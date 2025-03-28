@@ -7,7 +7,7 @@ const Feature = () => {
             <div>
                 <h1 className="text-5xl font-bold p-8">我們的特色</h1>
                 <div className='mt-10 join join-vertical lg:join-horizontal'>
-                    <div className="card bg-base-100 md:mx-5 mx-10 shadow-sm join-item">
+                    <div className="card bg-base-100 md:mx-5 mx-10 shadow-sm join-item rounded-xl">
                         <figure className="px-10 pt-10">
                             <img
                             src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
@@ -22,11 +22,11 @@ const Feature = () => {
                             </h2>
                             <p>我們提供個性化的便當選擇，讓您自由搭配喜愛的食材，享受健康美味的餐點。</p>
                             <div className="card-actions">
-                            <button className="btn btn-primary">開始製作</button>
+                            <button className="btn btn-primary mt-2">開始製作</button>
                             </div>
                         </div>
                     </div>
-                    <div className="card bg-base-100 md:mx-5 mx-10  shadow-sm join-item">
+                    <div className="card bg-base-100 md:mx-5 mx-10  shadow-sm join-item rounded-xl">
                         <figure className="px-10 pt-10">
                             <img
                             src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
@@ -41,11 +41,11 @@ const Feature = () => {
                             </h2>
                             <p>我們清楚呈現食材的營養價值與標示，讓您每一口都可以吃的安心又健康。</p>
                             <div className="card-actions">
-                            <button className="btn btn-primary">查看營養資訊</button>
+                            <button className="btn btn-primary mt-2">查看營養資訊</button>
                             </div>
                         </div>
                     </div>
-                    <div className="card bg-base-100 md:mx-5 mx-10  shadow-sm join-item">
+                    <div className="card bg-base-100 md:mx-5 mx-10  shadow-sm join-item rounded-xl">
                         <figure className="px-10 pt-10">
                             <img
                             src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
@@ -60,7 +60,7 @@ const Feature = () => {
                             </h2>
                             <p>我們打造出3D的便當模擬技術，即時預覽便當外觀，讓每一餐都充滿驚喜！</p>
                             <div className="card-actions">
-                            <button className="btn btn-primary">開始製作</button>
+                            <button className="btn btn-primary mt-2">開始製作</button>
                             </div>
                         </div>
                     </div>

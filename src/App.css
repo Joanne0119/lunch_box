@@ -1,9 +1,10 @@
 @import "tailwindcss";
-@plugin "daisyui";
+@plugin "daisyui"{
+  themes: caramellatte --default, coffee --prefersdark;
+}
 
 html {
   scroll-behavior: smooth;
-  scrollbar-color: red orange;
   scrollbar-width: thin;
 }
 

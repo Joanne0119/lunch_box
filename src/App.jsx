@@ -8,6 +8,7 @@ import Catlog from './pages/Catlog'
 import Make from './pages/Make'
 import Profile from './pages/Profile'
 import Login from './pages/Login'
+import DarkmodeBtn from './components/DarkmodeBtn'
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/login" element={<Login />} />
         </Routes>
+      <DarkmodeBtn />
       <Footer />
     </BrowserRouter>
   )
