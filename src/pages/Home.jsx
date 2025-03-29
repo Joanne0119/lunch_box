@@ -3,13 +3,16 @@ import HomeSpline from '../components/Home/HomeSpline'
 import Hero from '../components/Home/Hero'
 import About from '../components/Home/About'
 import Feature from '../components/Home/Feature'
+import EndSection from '../components/Home/EndSection'
 const Home = () => {
   return (
     <div>
       <HomeSpline />
       <Hero />
+      <div className='h-96'></div>
       <About />
       <Feature />
+      <EndSection />
     </div>
   )
 }

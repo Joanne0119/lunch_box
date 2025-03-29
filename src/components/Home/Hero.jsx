@@ -12,7 +12,6 @@ const Hero = () => {
             <button className='btn btn-secondary dark:btn-primary md:mx-3 mx-10 my-2'>開始製作</button>
             <button className='btn btn-secondary dark:btn-primary md:mx-3 mx-10 my-2'>了解更多</button>
         </div>
-        
     </div>
   )
 }

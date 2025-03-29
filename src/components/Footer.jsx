@@ -4,12 +4,16 @@ import { Link } from 'react-router'
 const Footer = ({theme}) => {
   return (
     <footer className="footer sm:footer-horizontal bg-base-300 p-10">
+        <div className='flex flex-col items-center'>
         {
             theme === 'caramellatte' ?
             <img src="assets/logoLight.png" alt="Logo" className='h-14' />
             :
             <img src="assets/logoDark.png" alt="Logo" className='h-14' />
         }
+        <p className="font-bold">盒味盒子</p>
+        </div>
+        
         <nav>
             <Link to="/" className="link link-hover">首頁</Link>
             <Link to="/make" className="link link-hover">製作便當</Link>

@@ -54,26 +54,27 @@ const Navbar = ({theme}) => {
     <header ref={navRef} className={`bg-base-300 fixed top-0 left-0 right-0 z-50 px-8 transition-all duration-1000 ease-in-out  ${scrolled ? 'opacity-0 py-2 pointer-events-none' : 'opacity-100 py-4'}`}>
         <div className='max-w-7xl mx-auto'>
             <div className='flex justify-between'>
-                <Link to='/' className='font-bold text-xl transition-colors'>
+                <Link to='/' className='font-bold flex items-center gap-2 transition-colors'>
                     {
                       theme === 'caramellatte' ?
                       <img src="assets/logoLight.png" alt="Logo" className='h-10' />
                       :
                       <img src="assets/logoDark.png" alt="Logo" className='h-10' />
                     }
+                    <p className="font-bold">盒味盒子</p>
                     
                 </Link>
                 <button onClick={() => toogleMenu()} className="hover:cursor-pointer focus:outline-none sm:hidden flex"
             aria-label="Toggle menu">
-                    {isOpen ? 
-                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.8" className="w-6 h-6 stroke-current">
+                <label className="swap swap-rotate">
+                  <input type="checkbox" checked={isOpen} onChange={toogleMenu}/>
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.8" className="swap-on w-6 h-6 stroke-current">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
                       </svg>
-                     : 
-                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.8" className="w-6 h-6 stroke-current">
-                       <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 5.25h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5" />
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.8" className="swap-off w-6 h-6 stroke-current">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 5.25h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5" />
                       </svg>
-                     }
+                </label>    
                 </button>
                 <nav className='sm:flex hidden'> {/* small devices show this, others do not */}
                     <NavItems />
