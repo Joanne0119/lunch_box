@@ -9,7 +9,7 @@ const Home = () => {
     <div>
       <HomeSpline />
       <Hero />
-      <div className='h-96'></div>
+      <div className='h-screen'></div>
       <About />
       <Feature />
       <EndSection />

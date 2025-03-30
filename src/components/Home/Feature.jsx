@@ -1,8 +1,9 @@
 import React from 'react'
+import { Link } from 'react-router'
 
 const Feature = () => {
   return (
-    <div className="hero bg-base-200 p-5">
+    <div className="hero bg-base-200 p-5 pb-20">
         <div className="hero-content text-center">
             <div>
                 <h1 className="text-5xl font-bold p-8">我們的特色</h1>
@@ -21,7 +22,11 @@ const Feature = () => {
                             </h2>
                             <p>我們提供個性化的便當選擇，讓您自由搭配喜愛的食材，享受健康美味的餐點。</p>
                             <div className="card-actions">
-                            <button className="btn btn-secondary dark:btn-primary mt-2">開始製作</button>
+                            <button className="btn btn-secondary dark:btn-primary mt-2">
+                            <Link to="/make">
+                                開始製作
+                            </Link>
+                            </button>
                             </div>
                         </div>
                     </div>
@@ -39,7 +44,11 @@ const Feature = () => {
                             </h2>
                             <p>我們清楚呈現食材的營養價值與標示，讓您每一口都可以吃的安心又健康。</p>
                             <div className="card-actions">
-                            <button className="btn btn-secondary dark:btn-primary mt-2">查看營養資訊</button>
+                            <button className="btn btn-secondary dark:btn-primary mt-2">
+                                <Link to="/catlog">
+                                查看營養資訊
+                                </Link>
+                            </button>
                             </div>
                         </div>
                     </div>
@@ -57,7 +66,11 @@ const Feature = () => {
                             </h2>
                             <p>我們打造出3D的便當模擬技術，即時預覽便當外觀，讓每一餐都充滿驚喜！</p>
                             <div className="card-actions">
-                            <button className="btn btn-secondary dark:btn-primary mt-2">開始製作</button>
+                            <button className="btn btn-secondary dark:btn-primary mt-2">
+                            <Link to="/make">
+                                開始製作
+                            </Link>
+                            </button>
                             </div>
                         </div>
                     </div>
