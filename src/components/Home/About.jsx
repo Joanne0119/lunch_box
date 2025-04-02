@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router';
+import { images } from '../../constants';
 
 const About = () => {
   return (
@@ -28,15 +29,6 @@ const About = () => {
 export default About
 
 function ImageCarousel() {
-  const images = [
-    "/assets/about1.png",
-    "/assets/about2.png",
-    "/assets/about3.png",
-    "/assets/about4.png",
-    "/assets/about5.png",
-    "/assets/about6.png",
-    "/assets/about7.png",
-  ];
 
   const [index, setIndex] = useState(0);
 

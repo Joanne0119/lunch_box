@@ -25,3 +25,13 @@ export const navLinks = [
         href: '/login',
     }
   ];
+
+   export const images = [
+      "/assets/aboutImage/about1.png",
+      "/assets/aboutImage/about2.png",
+      "/assets/aboutImage/about3.png",
+      "/assets/aboutImage/about4.png",
+      "/assets/aboutImage/about5.png",
+      "/assets/aboutImage/about6.png",
+      "/assets/aboutImage/about7.png",
+    ];
