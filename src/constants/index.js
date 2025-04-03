@@ -58,12 +58,12 @@ export const navLinks = [
         { id: 14, name: "青江菜", type: "vegetable", calories: 13, protein: 1.5, carbs: 2.2, fat: 0.2, description: "低熱量，高鈣質與維生素A。", image: "/assets/ingredientsImage/whiteRice.png"  },
         { id: 16, name: "大陸妹", type: "vegetable", calories: 18, protein: 2.0, carbs: 3.5, fat: 0.3, description: "富含膳食纖維，有助於消化。", image: "/assets/ingredientsImage/whiteRice.png"  },
         { id: 17, name: "扁豌豆", type: "vegetable", calories: 42, protein: 3.0, carbs: 7.1, fat: 0.3, description: "含有豐富的葉酸與維生素K。", image: "/assets/ingredientsImage/whiteRice.png"  },
-        { id: 17, name: "空心菜", type: "vegetable", calories: 24, protein: 1.5, carbs: 3.1, fat: 0.3, description: "富含膳食纖維。", image: "/assets/ingredientsImage/whiteRice.png"  },
-        { id: 18, name: "秋葵", type: "vegetable", calories: 33, protein: 2.0, carbs: 7.4, fat: 0.1, description: "富含膳食纖維，有助於腸胃健康。", image: "/assets/ingredientsImage/whiteRice.png"  },
+        { id: 18, name: "空心菜", type: "vegetable", calories: 24, protein: 1.5, carbs: 3.1, fat: 0.3, description: "富含膳食纖維。", image: "/assets/ingredientsImage/whiteRice.png"  },
+        { id: 19, name: "秋葵", type: "vegetable", calories: 33, protein: 2.0, carbs: 7.4, fat: 0.1, description: "富含膳食纖維，有助於腸胃健康。", image: "/assets/ingredientsImage/whiteRice.png"  },
       ],
       step4: [
-        { id: 19, name: "水煮蛋", type: "other", calories: 68, protein: 5.5, carbs: 0.6, fat: 4.8, description: "完整蛋白質來源，富含膽鹼與B群。", image: "/assets/ingredientsImage/whiteRice.png"  },
-        { id: 20, name: "玉米", type: "other", calories: 96, protein: 3.2, carbs: 21, fat: 1.5, description: "富含膳食纖維與維生素B群。", image: "/assets/ingredientsImage/whiteRice.png"  },
+        { id: 20, name: "水煮蛋", type: "other", calories: 68, protein: 5.5, carbs: 0.6, fat: 4.8, description: "完整蛋白質來源，富含膽鹼與B群。", image: "/assets/ingredientsImage/whiteRice.png"  },
+        { id: 21, name: "玉米", type: "other", calories: 96, protein: 3.2, carbs: 21, fat: 1.5, description: "富含膳食纖維與維生素B群。", image: "/assets/ingredientsImage/whiteRice.png"  },
       ],
     };
 
