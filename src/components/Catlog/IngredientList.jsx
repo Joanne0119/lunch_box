@@ -9,7 +9,7 @@ const IngredientList = ({ ingredients, step }) => {
         <div className="grid lg:grid-cols-6 md:grid-cols-4 sm:grid-cols-2 gap-4 mt-8">
             {
                 list.map(
-                    (ingredient) => <IngredientItem ingredient={ingredient} key={ingredient.id} />
+                    (ingredient, index) => <IngredientItem ingredient={ingredient} key={ingredient.id} index={index}/>
                 )
             }
         </div>
