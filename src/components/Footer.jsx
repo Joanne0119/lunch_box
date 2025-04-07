@@ -7,9 +7,9 @@ const Footer = ({theme}) => {
         <div className='flex flex-col items-center'>
         {
             theme === 'caramellatte' ?
-            <img src="assets/logoLight.png" alt="Logo" className='h-14' />
+            <img src="/assets/logoLight.png" alt="Logo" className='h-14' />
             :
-            <img src="assets/logoDark.png" alt="Logo" className='h-14' />
+            <img src="/assets/logoDark.png" alt="Logo" className='h-14' />
         }
         <p className="font-bold">盒味盒子</p>
         </div>

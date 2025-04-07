@@ -57,9 +57,9 @@ const Navbar = ({theme}) => {
                 <Link to='/' className='font-bold flex items-center gap-2 transition-colors'>
                     {
                       theme === 'caramellatte' ?
-                      <img src="assets/logoLight.png" alt="Logo" className='h-10' />
+                      <img src="/assets/logoLight.png" alt="Logo" className='h-10' />
                       :
-                      <img src="assets/logoDark.png" alt="Logo" className='h-10' />
+                      <img src="/assets/logoDark.png" alt="Logo" className='h-10' />
                     }
                     <p className="font-bold">盒味盒子</p>
                     

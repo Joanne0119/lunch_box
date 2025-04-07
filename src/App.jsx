@@ -27,17 +27,17 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Navbar theme={theme}/>
-        <Routes >
-          <Route path="/" element={<Home />} />
-          <Route path="/make" element={<Make />} />
-          <Route path="/catlog" element={<Catlog />} />
-          <Route path="/catlog/:ingredientId" element={<CatlogDetail />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/login" element={<Login />} />
-        </Routes>
-      <DarkmodeBtn toggleTheme={toggleTheme} theme={theme}/>
-      <Footer theme={theme}/>
+      <Navbar theme={theme} />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/make" element={<Make />} />
+        <Route path="/catlog" element={<Catlog />} />
+        <Route path="/catlog/:ingredientType" element={<CatlogDetail />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
+      <DarkmodeBtn toggleTheme={toggleTheme} theme={theme} />
+      <Footer theme={theme} />
     </BrowserRouter>
   )
 }
