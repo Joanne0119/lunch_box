@@ -1,6 +1,7 @@
 import React from 'react'
 import { useParams, useSearchParams, Link, useNavigate } from 'react-router'
 import { ingredients, typeMap } from '../constants'
+import Carousel from '../components/Catlog/Carousel'
 
 const CatlogDetail = () => {
   const navigate = useNavigate();
@@ -33,6 +34,24 @@ const CatlogDetail = () => {
           <span>{`${typeZH}`}</span>
         </button>
         <span>{`>>${ingredient.name}`}</span>
+      </div>
+      {/* 食材詳細資料 */}
+      <div>
+        <div className="w-full flex items-center justify-between">
+          {/* 文字+返回按鈕 */}
+          <div className="mt-10">
+            <h1 className="text-3xl font-bold">{ingredient.name}</h1>
+            <p className="text-lg mt-2 mb-8">{ingredient.description}</p>
+          </div>
+          <div>
+            <button
+              className="btn btn-secondary dark:btn-primary"
+              onClick={() => navigate(`/catlog?tab=${currentTab}`)}
+            >返回</button>
+          </div>
+        </div>
+        {/* 圖片輪播 */}
+        <Carousel ingredient={ingredient} />
       </div>
     </div>
   )
