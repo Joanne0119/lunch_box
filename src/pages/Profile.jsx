@@ -1,9 +1,9 @@
 import React from 'react'
-
+import Drawer from '../components/Profile/Drawer'
 const Profile = () => {
   return (
     <div className='h-screen flex justify-center items-center'>
-      <h1 className='text-black text-3xl font-bold'>Profile</h1>
+      <Drawer />
     </div>
   )
 }

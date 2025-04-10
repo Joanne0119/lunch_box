@@ -10,6 +10,7 @@ import Profile from './pages/Profile'
 import Login from './pages/Login'
 import DarkmodeBtn from './components/DarkmodeBtn'
 import CatlogDetail from './pages/CatlogDetail'
+import MakeModel from './pages/MakeModel'
 
 function App() {
   const [theme, setTheme] = useState(() => {
@@ -31,6 +32,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/make" element={<Make />} />
+        <Route path="/makeresult" element={<MakeModel />} />
         <Route path="/catlog" element={<Catlog />} />
         <Route path="/catlog/:ingredientType" element={<CatlogDetail />} />
         <Route path="/profile" element={<Profile />} />
