@@ -3,8 +3,8 @@ import React, { useState } from 'react'
 const Carousel = ({ ingredient }) => {
     const imgs = [
         ingredient.image,  // 食材本身的圖片（3D）
-        `/assets/conceptImage/${ingredient.name}-concept.jpg`, // 食材本身的圖片（2D）
-        `/assets/nutrientImage/${ingredient.name}-nutrient.png`, // 營養標示
+        `/assets/conceptImage/concept${ingredient.id}.jpg`, // 食材本身的圖片（2D）
+        `/assets/nutrientImage/nutrient${ingredient.id}.png`, // 營養標示
     ]
 
     const [index, setIndex] = useState(0); // 設定當前顯示的圖片索引
