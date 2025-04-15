@@ -13,7 +13,7 @@ const IngredientItem = ({ ingredient, step, index }) => {
                         />
                     </figure>
                     <div className="card-body">
-                        <h2 className="card-title">{ingredient.name} </h2>
+                        <h2 className="card-title">{ingredient.name}</h2>
                         <p>{ingredient.description}</p>
                     </div>
                 </div>
