@@ -36,7 +36,7 @@ function App() {
         <Route path="/catlog" element={<Catlog />} />
         <Route path="/catlog/:ingredientType" element={<CatlogDetail />} />
         <Route path="/profile" element={<Profile />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<Login theme={theme} />} />
       </Routes>
       <DarkmodeBtn toggleTheme={toggleTheme} theme={theme} />
       <Footer theme={theme} />
