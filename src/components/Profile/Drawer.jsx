@@ -7,15 +7,22 @@ const Drawer = () => {
 
   return (
     <div className="drawer lg:drawer-open transition duration-300 ease-in-out">
-    
-      <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
+
+      <input id="my-drawer" type="checkbox" className="drawer-toggle" />
       {/* Page content here */}
-      <div className="drawer-content flex flex-col items-center mt-34 lg:ml-4">
+      <div className="drawer-content mt-34 lg:ml-4">
+        {/* 螢幕寬度過小時收起 drawer */}
+        <label 
+          htmlFor="my-drawer" 
+          className="drawer-button border-none cursor-pointer bg-transparent lg:hidden fixed top-20 left-2 mt-4 ml-4"
+        >
+          <img className="w-8 h-8" src="/assets/guest.png" alt="帳號頭像" />
+        </label>
         {currentSelected === 1 ? <Account /> : <OrderRecord />}
       </div>
-      
+
       <div className="drawer-side">
-        <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
+        <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay"></label>
         <ul className="menu bg-base-200 text-base-content min-h-full w-80 px-4 pt-26 text-lg">
           {/* Sidebar content here */}
           <div className="flex flex-col items-center justify-center">
