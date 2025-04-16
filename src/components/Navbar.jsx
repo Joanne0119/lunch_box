@@ -10,7 +10,7 @@ const NavItems = () => {
             <li key={item.id} className='text-neutral-400 font-generalsans max-sm:hover:bg-base-300 max-sm:w-full max-sm:rounded-md py-2 max-sm:px-5'>
               <Link 
                 to={item.href}
-                className='text-lg md:text-base transition-all text-base-content hover:text-primary focus:text-primary'
+                className='text-base md:text-lg transition-all text-base-content hover:text-primary focus:text-primary'
               >
                 {item.name}
               </Link>
@@ -66,8 +66,8 @@ const Navbar = ({theme}) => {
                 </Link>
                 <button onClick={() => toogleMenu()} className="hover:cursor-pointer focus:outline-none sm:hidden flex"
             aria-label="Toggle menu">
-                <label className="swap swap-rotate">
-                  <input type="checkbox" checked={isOpen} onChange={toogleMenu}/>
+                <label htmlFor="menu" className="swap swap-rotate">
+                  <input id="menu" type="checkbox" checked={isOpen} onChange={toogleMenu}/>
                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.8" className="swap-on w-6 h-6 stroke-current">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
                       </svg>

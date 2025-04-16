@@ -17,9 +17,10 @@ const DarkmodeBtn = ({toggleTheme, theme}) => {
 
   return (
     <div className="fixed bottom-20 right-8">
-      <label className="btn btn-circle p-6 swap swap-rotate">
+      <label htmlFor="switch" className="btn btn-circle p-6 swap swap-rotate">
       
       <input
+        id="switch"
         type="checkbox"
         checked={theme === "coffee"}
         onChange={toggleTheme}

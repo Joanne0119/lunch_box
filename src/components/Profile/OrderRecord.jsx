@@ -32,9 +32,9 @@ const OrderRecord = () => {
                 )
             }
             {/* 上一頁＆下一頁按鈕 */}
-            <div className="mt-4 transition duration-300 ease-in-out">
+            <div className="mt-4 transition duration-300 ease-in-out lg:mb-0 mb-20">
                 <button 
-                    className="btn btn-primary px-8 py-6 mr-16"
+                    className="btn btn-primary px-8 py-6 sm:mr-16 mr-10"
                     disabled={pageNumber === 1 ? "disabled" : ""}
                     onClick={prev}
                 >上一頁</button>
