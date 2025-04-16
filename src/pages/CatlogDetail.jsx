@@ -1,5 +1,5 @@
 import React from 'react'
-import { useParams, useSearchParams, Link, useNavigate } from 'react-router'
+import { useParams, useSearchParams, useNavigate } from 'react-router'
 import { ingredients, typeMap } from '../constants'
 import Carousel from '../components/Catlog/Carousel'
 

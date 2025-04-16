@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Account from './Account'
 import OrderRecord from './OrderRecord'
+import { useSearchParams } from 'react-router'
 
 const Drawer = () => {
   const [currentSelected, setCurrentSelected] = useState(1); // 記錄當前選擇的 drawer 按鈕＆頁面
@@ -14,7 +15,7 @@ const Drawer = () => {
         {/* 螢幕寬度過小時收起 drawer */}
         <label 
           htmlFor="my-drawer" 
-          className="drawer-button border-none cursor-pointer bg-transparent lg:hidden fixed top-20 left-2 mt-4 ml-4"
+          className="drawer-button border-none cursor-pointer bg-base-100 p-4 rounded-lg lg:hidden fixed top-20 left-2 mt-4 ml-4"
         >
           <img className="w-8 h-8" src="/assets/guest.png" alt="帳號頭像" />
         </label>

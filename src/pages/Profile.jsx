@@ -3,7 +3,7 @@ import Drawer from '../components/Profile/Drawer'
 
 const Profile = () => {
   return (
-    <div className='h-screen'>
+    <div className='h-min-screen'>
       <Drawer />
     </div>
   )
