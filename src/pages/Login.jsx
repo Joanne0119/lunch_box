@@ -1,9 +1,10 @@
 import React from 'react'
+import AuthForm from '../components/Login/AuthForm'
 
-const Login = () => {
+const Login = ({theme}) => {
   return (
     <div className='h-screen flex justify-center items-center'>
-      <h1 className='text-black text-3xl font-bold'>Login</h1>
+      <AuthForm  theme={theme}/>
     </div>
   )
 }
