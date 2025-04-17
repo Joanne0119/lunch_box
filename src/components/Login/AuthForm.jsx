@@ -75,9 +75,9 @@ const AuthForm = ({theme}) => {
           </div>
 
           {!isSignUp && (
-            <div className="flex justify-between items-center mb-4 text-sm text-gray-600">
+            <div className="flex justify-between items-center mb-4 text-sm">
               <label className="flex items-center cursor-pointer select-none group">
-                <div className="w-4 h-4 mr-2 bg-white rounded-sm flex items-center justify-center transition duration-150 group-hover:scale-110">
+                <div className="w-4 h-4 mr-2 bg-base-100 border border-base-primary rounded-sm flex items-center justify-center transition duration-150 group-hover:scale-110">
                     <input
                     type="checkbox"
                     className="hidden peer"
@@ -102,7 +102,7 @@ const AuthForm = ({theme}) => {
 
           <button
             type="button"
-            className="w-full py-2 btn btn-secondary text-white rounded-full font-semibold transition"
+            className="w-full py-2 btn btn-primary text-base-100 rounded-full font-semibold transition"
           >
             <Link to={isSignUp ? '/login' : '/'}>
                 {isSignUp ? '註冊' : '登入'} 
