@@ -17,12 +17,12 @@ const Footer = ({theme}) => {
         <nav>
             <Link to="/" className="link link-hover">首頁</Link>
             <Link to="/make" className="link link-hover">製作便當</Link>
-            <Link to="/catlog" className="link link-hover">食材型錄</Link>
+            <Link to="/catlog" className="link link-hover">食品型錄</Link>
         </nav>
         <nav>
             <Link to="/profile" className="link link-hover">個人頁面</Link>
             <Link to="/login" className="link link-hover">登入</Link>
-            <Link to="/" className="link link-hover">註冊</Link>
+            {/* <Link to="/" className="link link-hover">註冊</Link> */}
         </nav>
         <nav>
             <div className="grid grid-flow-col gap-4">
