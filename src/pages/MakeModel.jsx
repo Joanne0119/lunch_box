@@ -1,12 +1,113 @@
-import React, { useState } from 'react'
+import React, { useState, Suspense, useRef } from 'react'
 import { useLocation } from 'react-router';
-import Spline from '@splinetool/react-spline';
+// import Spline from '@splinetool/react-spline';
 import { orderHints } from '../constants';
-
+const Spline = React.lazy(() => import('@splinetool/react-spline'));
 const MakeModel = () => {
     const location = useLocation();
     const { selectedIngredients } = location.state || {};
     const [isOpen, setIsOpen] = useState(false);
+
+    const proteinRef = useRef();
+
+    console.log(selectedIngredients);
+
+    function onSplineLoad(spline) {
+        // const proteinObj = spline.findObjectByName('simon');
+        // proteinRef.current = proteinObj;
+        // if(proteinObj) {
+        //     proteinObj.visible = false;
+        // }
+        // const proteinChickenObj = spline.findObjectByName('chicken');
+        // proteinRef.current = proteinChickenObj;
+        // if(proteinChickenObj) {
+        //     proteinChickenObj.visible = false;
+        // }
+        // const proteinSteakObj = spline.findObjectByName('steak');
+        // proteinRef.current = proteinSteakObj;
+        // if(proteinSteakObj) {
+        //     proteinSteakObj.visible = false;
+        // }
+        // const proteinTofuObj = spline.findObjectByName('tofu');
+        // proteinRef.current = proteinTofuObj;
+        // if(proteinTofuObj) {
+        //     proteinTofuObj.visible = false;
+        // }
+        // const proteinEggObj = spline.findObjectByName('Egg');
+        // proteinRef.current = proteinEggObj;
+        // if(proteinEggObj) {
+        //     proteinEggObj.visible = false;
+        // }
+        // const proteinCornObj = spline.findObjectByName('Egg');
+        // proteinRef.current = proteinCornObj;
+        // if(proteinCornObj) {
+        //     proteinCornObj.visible = false;
+        // }
+        // const proteinVeg1Obj = spline.findObjectByName('Veg1');
+        // proteinRef.current = proteinVeg1Obj;
+        // if(proteinVeg1Obj) {
+        //     proteinVeg1Obj.visible = false;
+        // }
+    
+        spline.findObjectByName('Veg1') ? (spline.findObjectByName('Veg1').visible = false ): undefined;
+        spline.findObjectByName('Veg2') ? (spline.findObjectByName('Veg2').visible = false) : undefined;
+        spline.findObjectByName('Veg3') ? (spline.findObjectByName('Veg3').visible = false ): undefined;
+        spline.findObjectByName('beans') ? (spline.findObjectByName('beans').visible = false) : undefined;
+        spline.findObjectByName('Brocoli') ? (spline.findObjectByName('Brocoli').visible = false) : undefined;
+        spline.findObjectByName('carrot') ? (spline.findObjectByName('carrot').visible = false) : undefined;
+        spline.findObjectByName('tamato') ? (spline.findObjectByName('tamato').visible = false) : undefined;
+        spline.findObjectByName('cucumber') ? (spline.findObjectByName('cucumber').visible = false) : undefined;
+        spline.findObjectByName('eggplant') ? (spline.findObjectByName('eggplant').visible = false) : undefined;
+        spline.findObjectByName('okra') ? (spline.findObjectByName('okra').visible = false) : undefined;
+        spline.findObjectByName('pumkin') ? (spline.findObjectByName('pumkin').visible = false) : undefined;
+        spline.findObjectByName('drytofu') ? (spline.findObjectByName('drytofu').visible = false) : undefined;
+        spline.findObjectByName('tofu') ? (spline.findObjectByName('tofu').visible = false) : undefined;
+        spline.findObjectByName('tofuSide') ? (spline.findObjectByName('tofuSide').visible = false) : undefined;
+        spline.findObjectByName('chicken') ? (spline.findObjectByName('chicken').visible = false) : undefined;
+        spline.findObjectByName('steak') ? (spline.findObjectByName('steak').visible = false) : undefined;
+        spline.findObjectByName('simon') ? (spline.findObjectByName('simon').visible = false) : undefined;
+        spline.findObjectByName('potato') ? (spline.findObjectByName('potato').visible = false) : undefined;
+        spline.findObjectByName('noodles') ? (spline.findObjectByName('noodles').visible = false) : undefined;
+        spline.findObjectByName('whiteRice') ? (spline.findObjectByName('whiteRice').visible = false) : undefined;
+        spline.findObjectByName('purpleRice') ? (spline.findObjectByName('purpleRice').visible = false) : undefined;
+        spline.findObjectByName('Egg') ? (spline.findObjectByName('Egg').visible = false) : undefined;
+        spline.findObjectByName('Corn') ? (spline.findObjectByName('Corn').visible = false) : undefined;
+
+        Object.entries(selectedIngredients).forEach(([step, ingredients]) => {
+            let step3Count = 0;
+            ingredients.forEach(ingredient => {
+              const objName = ingredient.splineName;
+              console.log("objName", objName);
+              const target = spline.findObjectByName(objName);
+              if (target) {
+                target.visible = true;
+                if (step === "step3") {
+                    step3Count++;
+                    switch (step3Count) {   
+                        case 1:
+                            target.position.set(-21.07, 1.31, 69.26);
+                            break;
+                        case 2:
+                            target.position.set(65.73, 1.31, 69.26);
+                            break;
+                        case 3:
+                            target.position.set(65.73, 1.31, 141.00);
+                            break;
+                        case 4:
+                            target.position.set(-21.07, 1.31,112.53);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+              } else {
+                console.warn("找不到對應的 Spline 物件:", objName);
+              }
+            });
+          });
+        
+    }
+    
     return (
         <div className='h-screen flex flex-col justify-start items-start pt-20 relative'>
             <h1 className='text-3xl font-bold mb-4 pl-10 pt-4'>你的便當</h1>
@@ -37,7 +138,10 @@ const MakeModel = () => {
                 </div>
                 
             </div>
-            <Spline scene="https://prod.spline.design/nzyOcxgRIO9CS7dl/scene.splinecode" />
+            <Suspense fallback={<div className='h-screen w-full flex justify-center items-center font-bold text-3xl'>Loading...</div>}>
+                <Spline scene="https://prod.spline.design/nzyOcxgRIO9CS7dl/scene.splinecode?v=3"
+                    onLoad={onSplineLoad}  />
+            </Suspense>
         </div>
     )
 }
