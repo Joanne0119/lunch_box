@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { navLinks } from '../constants';
 import { Link } from 'react-router';
+import { useSelector, useDispatch } from 'react-redux';
+import { logout } from '../redux/userSlice';
 const NavItems = () => {
   
     return (
@@ -22,6 +24,9 @@ const NavItems = () => {
   };
 
 const Navbar = ({theme}) => {
+    const user = useSelector((state) => state.user.user) || null;
+    const isLogin = useSelector((state) => state.user.isLogin) || false;
+    const dispatch = useDispatch();
     const [isOpen, setIsOpen] = useState(false); //isOpen is a variable and setIsOpen is a function to change the isOpen state
     const toogleMenu = () => setIsOpen((preIsOpen) => !preIsOpen);
 
@@ -76,15 +81,49 @@ const Navbar = ({theme}) => {
                       </svg>
                 </label>    
                 </button>
-                <nav className='sm:flex hidden'> {/* small devices show this, others do not */}
+                <nav className='list-none sm:flex hidden'> {/* small devices show this, others do not */}
                     <NavItems />
+                    <li key="5" className='text-neutral-400 font-generalsans max-sm:hover:bg-base-300 max-sm:w-full max-sm:rounded-md py-2 max-sm:px-5'>
+                    {user ? (
+                    <button
+                      onClick={() => dispatch(logout())}
+                      className="md:ml-10 ml-8 btn btn-primary md:text-lg transition-all text-base-content hover:text-primary focus:text-primary"
+                    >
+                      登出
+                    </button>
+                  ) : (
+                    <Link
+                      to="/login"
+                      className="md:ml-10 ml-8 btn btn-primary md:text-lg transition-all focus:text-primary"
+                    >
+                      登入/註冊
+                    </Link>
+                  )}
+                  </li>
                 </nav>
             </div>
 
         </div>
-        <div className={`absolute left-0 right-0 bg-base-300 backdrop-blur-sm transition-all duration-500 ease-in-out overflow-hidden z-20 mx-auto sm:hidden block ${isOpen ? 'max-h-screen' : 'max-h-0'} ${scrolled ? 'opacity-0' : 'opacity-100'}`}>
+        <div className={`list-none absolute left-0 right-0 bg-base-300 backdrop-blur-sm transition-all duration-500 ease-in-out overflow-hidden z-20 mx-auto sm:hidden block ${isOpen ? 'max-h-screen' : 'max-h-0'} ${scrolled ? 'opacity-0' : 'opacity-100'}`}>
             <nav className='p-5'>
-                <NavItems />    
+                <NavItems /> 
+                <li key="5" className='text-neutral-400 font-generalsans max-sm:hover:bg-base-300 max-sm:w-full max-sm:rounded-md py-2 max-sm:px-5'>
+                    {user ? (
+                    <button
+                      onClick={() => dispatch(logout())}
+                      className="list-none btn btn-primary md:text-lg transition-all"
+                    >
+                      登出
+                    </button>
+                  ) : (
+                    <Link
+                      to="/login"
+                      className="list-none btn btn-primary md:text-lg transition-all"
+                    >
+                      登入/註冊
+                    </Link>
+                  )}
+                  </li>   
             </nav>
         </div>
     </header>

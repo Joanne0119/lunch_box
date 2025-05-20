@@ -18,11 +18,6 @@ export const navLinks = [
     id: 4,
     name: '個人頁面',
     href: '/profile',
-  },
-  {
-    id: 5,
-    name: '登入',
-    href: '/login',
   }
 ];
 
@@ -82,4 +77,11 @@ export const typeMap = {
   protein: '蛋白質主菜',
   vegetable: '配菜',
   other: '其他'
+};
+
+export const ingredientToName = {
+  steak: ["厚厚厚牛牛便當", "牛來運轉便當", "牛味十足便當"],
+  chicken: ["雞不可失便當", "雞來運轉便當", "香烤G腿便當"],
+  tofu: ["柔情似豆腐便當","豆你玩便當", "豆腐方塊便當"],
+  simon: ["鮭心似魚便當", "鮭鮭便當", "鮭喜發財便當"],
 };

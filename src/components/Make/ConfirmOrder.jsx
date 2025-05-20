@@ -1,7 +1,9 @@
 import React from 'react'
 import { orderHints } from '../../constants'
+import { useSelector } from 'react-redux'
 
-const ConfirmOrder = ({ selectedIngredients }) => {
+const ConfirmOrder = () => {
+    const selectedIngredients = useSelector(state => state.order.selectedIngredients)
     return (
         <div className="p-6">
         <h1 className="text-2xl font-bold">訂單確認</h1>

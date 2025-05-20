@@ -1,54 +1,41 @@
-import React, { useState, Suspense, useRef } from 'react'
-import { useLocation } from 'react-router';
+import React, { useState, Suspense, useRef, useEffect } from 'react'
+import { useLocation, useNavigate } from 'react-router';
 // import Spline from '@splinetool/react-spline';
-import { orderHints } from '../constants';
+import { orderHints, ingredientToName } from '../constants';
+import { useDispatch } from 'react-redux';
+import { resetOrder } from '../redux/orderSlice';
 const Spline = React.lazy(() => import('@splinetool/react-spline'));
 const MakeModel = () => {
     const location = useLocation();
     const { selectedIngredients } = location.state || {};
     const [isOpen, setIsOpen] = useState(false);
-
-    const proteinRef = useRef();
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     console.log(selectedIngredients);
 
+    const [bentoName, setBentoName] = useState('');
+
+    useEffect(() => {
+    if (selectedIngredients) {
+        const name = getBentoName(selectedIngredients);
+        setBentoName(name);
+    }
+    }, [selectedIngredients]);
+
+    function getBentoName(selectedIngredients) {
+        const step2 = selectedIngredients.step2 || [];
+        for (const item of step2) {
+            const names = ingredientToName[item.splineName];
+            if (names) {
+            const randomIndex = Math.floor(Math.random() * names.length);
+            return names[randomIndex];
+            }
+        }
+        return "就是好吃的便當";
+    }
+
     function onSplineLoad(spline) {
-        // const proteinObj = spline.findObjectByName('simon');
-        // proteinRef.current = proteinObj;
-        // if(proteinObj) {
-        //     proteinObj.visible = false;
-        // }
-        // const proteinChickenObj = spline.findObjectByName('chicken');
-        // proteinRef.current = proteinChickenObj;
-        // if(proteinChickenObj) {
-        //     proteinChickenObj.visible = false;
-        // }
-        // const proteinSteakObj = spline.findObjectByName('steak');
-        // proteinRef.current = proteinSteakObj;
-        // if(proteinSteakObj) {
-        //     proteinSteakObj.visible = false;
-        // }
-        // const proteinTofuObj = spline.findObjectByName('tofu');
-        // proteinRef.current = proteinTofuObj;
-        // if(proteinTofuObj) {
-        //     proteinTofuObj.visible = false;
-        // }
-        // const proteinEggObj = spline.findObjectByName('Egg');
-        // proteinRef.current = proteinEggObj;
-        // if(proteinEggObj) {
-        //     proteinEggObj.visible = false;
-        // }
-        // const proteinCornObj = spline.findObjectByName('Egg');
-        // proteinRef.current = proteinCornObj;
-        // if(proteinCornObj) {
-        //     proteinCornObj.visible = false;
-        // }
-        // const proteinVeg1Obj = spline.findObjectByName('Veg1');
-        // proteinRef.current = proteinVeg1Obj;
-        // if(proteinVeg1Obj) {
-        //     proteinVeg1Obj.visible = false;
-        // }
-    
         spline.findObjectByName('Veg1') ? (spline.findObjectByName('Veg1').visible = false ): undefined;
         spline.findObjectByName('Veg2') ? (spline.findObjectByName('Veg2').visible = false) : undefined;
         spline.findObjectByName('Veg3') ? (spline.findObjectByName('Veg3').visible = false ): undefined;
@@ -85,16 +72,16 @@ const MakeModel = () => {
                     step3Count++;
                     switch (step3Count) {   
                         case 1:
-                            target.position.set(-21.07, 1.31, 69.26);
+                            target.position.set(-30.07, 1.31, 55.26);
                             break;
                         case 2:
-                            target.position.set(65.73, 1.31, 69.26);
+                            target.position.set(50.73, 1.31, 55.26);
                             break;
                         case 3:
-                            target.position.set(65.73, 1.31, 141.00);
+                            target.position.set(40.73, 1.31, 120.00);
                             break;
                         case 4:
-                            target.position.set(-21.07, 1.31,112.53);
+                            target.position.set(-30.07, 1.31,112.53);
                             break;
                         default:
                             break;
@@ -110,8 +97,19 @@ const MakeModel = () => {
     
     return (
         <div className='h-screen flex flex-col justify-start items-start pt-20 relative'>
-            <h1 className='text-3xl font-bold mb-4 pl-10 pt-4'>你的便當</h1>
-            <div className='absolute top-25 right-0 mx-auto px-4'>
+            <div className='w-full flex flex-row justify-start items-center mt-5'>
+                <h1 className='text-4xl font-bold mb-4 pl-10 pt-4'>{bentoName}</h1>
+                <button
+                className="btn btn-primary mx-10 my-2 mb-4 "
+                onClick={() => {
+                    dispatch(resetOrder());
+                    navigate('/make')
+                }}
+                >
+                製作新便當
+                </button>
+            </div>
+            <div className='w-full md:w-96 ml-10w-full md:w-96 absolute top-40 md:top-24 md:right-10 ml-10'>
                 <div
                     tabIndex={0}
                     className={`cursor-pointer collapse collapse-arrow bg-base-200 rounded-box ${isOpen ? "collapse-open" : "collapse-close"} w-80 md:w-96 shadow-lg`}

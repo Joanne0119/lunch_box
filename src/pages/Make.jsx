@@ -5,6 +5,8 @@ import OrderDetails from '../components/Make/OrderDetails'
 import ConfirmOrder from '../components/Make/ConfirmOrder'
 import { ingredients, orderHints } from '../constants'
 import { useNavigate } from 'react-router'
+import { useSelector, useDispatch } from 'react-redux'
+import { setStepIngredients, toggleIngredient } from '../redux/orderSlice'
 
 const Make = () => {
   const navigate = useNavigate();
@@ -12,13 +14,9 @@ const Make = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const [step, setStep] = useState(1); // 目前的步驟
-  const [selectedIngredients, setSelectedIngredients] = useState(
-    {
-      step1: [],   
-      step2: [], 
-      step3: [],     
-      step4: []
-    }); // 選擇的食材
+  const dispatch = useDispatch()
+  const selectedIngredients = useSelector(state => state.order.selectedIngredients)
+
     
   const [isOrderConfirmed, setIsOrderConfirmed] = useState(false);
 
@@ -27,30 +25,34 @@ const Make = () => {
 
   // 設定選擇的食材
   const handleSelectIngredient = (ingredient) => {
-    setSelectedIngredients((prev) => {
-      const newSelection = { ...prev };
+    // setSelectedIngredients((prev) => {
+    //   const newSelection = { ...prev };
 
-      if (!newSelection.step3) newSelection.step3 = [];
-      if (!newSelection.step4) newSelection.step4 = [];
+    //   if (!newSelection.step3) newSelection.step3 = [];
+    //   if (!newSelection.step4) newSelection.step4 = [];
 
-      if (step === 1 || step === 2) {
-        newSelection[`step${step}`] = [ingredient]; // 只能選一個
-      } else if (step === 3) {
-        if (newSelection.step3.some((item) => item.id === ingredient.id)) {
-          newSelection.step3 = newSelection.step3.filter((item) => item.id !== ingredient.id);
-        } else if (newSelection.step3.length < 4) {
-          newSelection.step3 = [...newSelection.step3, ingredient];
-        }
-      } else if (step === 4) {
-        if (newSelection.step4.some((item) => item.id === ingredient.id)) {
-          newSelection.step4 = newSelection.step4.filter((item) => item.id !== ingredient.id);
-        } else {
-          newSelection.step4 = [...newSelection.step4, ingredient];
-        }
-      }
+    //   if (step === 1 || step === 2) {
+    //     newSelection[`step${step}`] = [ingredient]; // 只能選一個
+    //   } else if (step === 3) {
+    //     if (newSelection.step3.some((item) => item.id === ingredient.id)) {
+    //       newSelection.step3 = newSelection.step3.filter((item) => item.id !== ingredient.id);
+    //     } else if (newSelection.step3.length < 4) {
+    //       newSelection.step3 = [...newSelection.step3, ingredient];
+    //     }
+    //   } else if (step === 4) {
+    //     if (newSelection.step4.some((item) => item.id === ingredient.id)) {
+    //       newSelection.step4 = newSelection.step4.filter((item) => item.id !== ingredient.id);
+    //     } else {
+    //       newSelection.step4 = [...newSelection.step4, ingredient];
+    //     }
+    //   }
 
-      return newSelection;
-    });
+    //   return newSelection;
+    // });
+    dispatch(toggleIngredient({
+      step: `step${step}`,
+      ingredient
+    }))
   };
 
   const handleNextStep = () => {
@@ -86,15 +88,10 @@ const Make = () => {
   }, [step]);
 
   const isDisabled = (step) => {  
-    if (step === 1) {
-      return !selectedIngredients.step1.length;
-    } else if (step === 2) {
-      return !selectedIngredients.step2.length;
-    } else if (step === 3) {
-      return !(selectedIngredients.step3.length > 3);
-    } else if (step === 4) {
-      return false;
-    }
+    const data = selectedIngredients[`step${step}`]
+    if (step === 1 || step === 2) return !data.length
+    if (step === 3) return data.length < 4
+    return false
   };
 
   return (
@@ -104,14 +101,13 @@ const Make = () => {
 
           <div className={`transition-all duration-500 md:w-3/4 ${isOpen ? "w-3/4" : "w-full"}`}>
             {isOrderConfirmed ?
-             <ConfirmOrder selectedIngredients={selectedIngredients}/> 
+             <ConfirmOrder /> 
              :
              <div>
                 <h1 className="text-2xl font-bold pt-6 pl-10">選擇你的食材</h1>
                 <h2 className="text-xl font-bold pt-4 pl-10">{orderHints[step - 1]}</h2>
                 <Order 
                   ingredients={currentStepIngredients} 
-                  selectedIngredients={selectedIngredients}
                   step={step}
                   onSelect={handleSelectIngredient}
                 />
@@ -119,7 +115,7 @@ const Make = () => {
           }
             
           </div>
-          <OrderDetails className="fixed bottom-5" isOpen={isOpen} setIsOpen={setIsOpen} selectedIngredients={selectedIngredients}/>
+          <OrderDetails className="fixed bottom-5" isOpen={isOpen} setIsOpen={setIsOpen}/>
         </div>
       <div className='mb-10 flex justify-around max-w-3/4 w-full mx-auto mt-6 px-4 items-start md:ml-2'>
       <button className='btn btn-primary' onClick={handlePrevStep} disabled={step === 1}>上一步</button>

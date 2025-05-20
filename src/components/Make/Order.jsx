@@ -1,7 +1,9 @@
 import React from 'react'
 import Card from './Card'
+import { useSelector } from 'react-redux'
 
-const Order = ({ ingredients, selectedIngredients, step, onSelect }) => {
+const Order = ({ ingredients, step, onSelect }) => {
+    const selectedIngredients = useSelector(state => state.order.selectedIngredients)
     const selected = selectedIngredients[`step${step}`] || [];
     return (
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">

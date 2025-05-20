@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router';
+import { login, register } from '../../firebase/authService';
+import { useDispatch } from 'react-redux';
+import { setUser } from '../../redux/userSlice';
 
 const AuthForm = ({theme}) => {
   const [isSignUp, setIsSignUp] = useState(false);
@@ -8,10 +11,44 @@ const AuthForm = ({theme}) => {
   const [showPassword, setShowPassword] = useState(false);
   const togglePassword = () => setShowPassword(!showPassword);
 
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
+
+  const dispatch = useDispatch();
+
+  const handleLogin = async () => {
+    try {
+      const userCredential = await login(email, password);
+      console.log("userCredential:", userCredential);
+      const user = userCredential.user; 
+      dispatch(setUser({ uid: user.uid, email: user.email }));
+      alert("登入成功");
+    } catch (error) {
+      console.error(error.message);
+      alert("登入失敗：" + error.message);
+    }
+  };
+
+  const handleRegister = async () => {
+    try {
+      const userCredential = await register(email, password, username);
+      const user = userCredential.user;
+      dispatch(setUser({ uid: user.uid, email: user.email, displayName: username }));
+      alert("註冊成功，請登入");
+    } catch (error) {
+      console.error(error.message);
+      alert("註冊失敗：" + error.message);
+    }
+  };
+
   return (
     <div className="flex items-center justify-center min-h-screen">
       <div className="w-full max-w-md bg-base-200 rounded-2xl shadow-lg p-8">
-        <form>
+        <form onSubmit={(e) => {
+            e.preventDefault();
+            isSignUp ? handleRegister() : handleLogin();
+          }}>
           <div className="flex flex-col items-center mb-6">
           {
             theme === 'caramellatte' ?
@@ -26,6 +63,8 @@ const AuthForm = ({theme}) => {
             <div className="relative mb-4">
               <input
                 type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
                 placeholder="請輸入您的使用者名稱"
                 className="w-full px-4 py-2 pl-10 border border-secondary-300  rounded-full focus:outline-none focus:ring-2 focus:ring-primary-300"
                 autoComplete="off"
@@ -40,6 +79,8 @@ const AuthForm = ({theme}) => {
           <div className="relative mb-4">
             <input
               type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               placeholder="請輸入您的電子郵件"
               className="w-full px-4 py-2 pl-10 border border-secondary-300 rounded-full focus:outline-none focus:ring-2 focus:ring-primary-300"
               autoComplete="off"
@@ -52,6 +93,8 @@ const AuthForm = ({theme}) => {
           <div className="relative mb-4">
             <input
               type={showPassword ? 'text' : 'password'}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               placeholder="請輸入您的密碼"
               className="w-full px-4 py-2 pl-10 border border-secondary-300  rounded-full focus:outline-none focus:ring-2 focus:ring-primary-300"
               autoComplete="off"
@@ -101,7 +144,7 @@ const AuthForm = ({theme}) => {
           )}
 
           <button
-            type="button"
+            type="submit"
             className="w-full py-2 btn btn-primary text-base-100 rounded-full font-semibold transition"
           >
             <Link to={isSignUp ? '/login' : '/'}>

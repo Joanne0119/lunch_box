@@ -1,8 +1,9 @@
 import React from 'react'
 import { orderHints } from '../../constants'
+import { useSelector } from 'react-redux'
 
-const OrderDetails = ({ isOpen, setIsOpen, selectedIngredients }) => {
-
+const OrderDetails = ({ isOpen, setIsOpen}) => {
+  const selectedIngredients = useSelector(state => state.order.selectedIngredients)
   return (
     <>
       {/* 手機版的展開按鈕 */}

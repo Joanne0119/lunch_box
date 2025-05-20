@@ -1,8 +1,15 @@
 import React, { useState, useEffect } from 'react'
+import { BrowserRouter, Route, Routes } from 'react-router'
+import { useDispatch } from 'react-redux';
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "./firebase/firebase";
+import { setUser, logout } from "./redux/userSlice";
+
+//css
 import './App.css'
+//components
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
-import { BrowserRouter, Route, Routes } from 'react-router'
 import Home from './pages/Home'
 import Catlog from './pages/Catlog'
 import Make from './pages/Make'
@@ -13,6 +20,22 @@ import CatlogDetail from './pages/CatlogDetail'
 import MakeModel from './pages/MakeModel'
 
 function App() {
+  // login and logout
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        dispatch(setUser({ uid: user.uid, email: user.email }));
+      } else {
+        dispatch(logout());
+      }
+      console.log(user);
+    });
+    return () => unsubscribe();
+  }, []);
+
+  // theme
   const [theme, setTheme] = useState(() => {
     return localStorage.getItem('theme') || 'caramellatte';
   });
