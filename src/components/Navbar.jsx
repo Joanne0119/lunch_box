@@ -87,14 +87,14 @@ const Navbar = ({theme}) => {
                     {user ? (
                     <button
                       onClick={() => dispatch(logout())}
-                      className="md:ml-10 ml-8 btn btn-primary md:text-lg transition-all text-base-content hover:text-primary focus:text-primary"
+                      className="md:ml-10 ml-8 md:text-lg transition-all text-base text-base-content font-semibold hover:text-primary focus:text-primary"
                     >
                       登出
                     </button>
                   ) : (
                     <Link
                       to="/login"
-                      className="md:ml-10 ml-8 btn btn-primary md:text-lg transition-all focus:text-primary"
+                      className="md:ml-10 ml-8 md:text-lg transition-all text-base text-base-content font-semibold hover:text-primary focus:text-primary"
                     >
                       登入/註冊
                     </Link>

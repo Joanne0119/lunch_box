@@ -15,7 +15,7 @@ const About = () => {
         <p className="py-6">
           我們致力於提供個性化的健康便當，讓每位顧客都能享受獨特的用餐體驗。透過3D可視化技術，我們提升了點餐的互動性與趣味性。
         </p>
-        <button className="btn btn-primary">
+        <button className="btn btn-secondary text-white hover:text-gray-300 text-medium">
           <Link to="/make">
             開始製作
           </Link>
