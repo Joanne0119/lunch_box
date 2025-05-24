@@ -2,12 +2,23 @@ import React, { useState } from 'react'
 import Account from './Account'
 import OrderRecord from './OrderRecord'
 import { useSearchParams } from 'react-router'
+import { useSelector, useDispatch } from 'react-redux';
+import { logout } from '../../redux/userSlice';
 
 const Drawer = () => {
   const [currentSelected, setCurrentSelected] = useState(1); // 記錄當前選擇的 drawer 按鈕＆頁面
+  const user = useSelector((state) => state.user.user) || null;
+  const dispatch = useDispatch();
+  if (!user) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <p className="text-lg font-bold">請先登入</p>
+      </div>
+    );
+  }
 
   return (
-    <div className="drawer lg:drawer-open transition duration-300 ease-in-out">
+    <div className="drawer lg:drawer-open transition duration-300 ease-in-out ">
 
       <input id="my-drawer" type="checkbox" className="drawer-toggle" />
       {/* Page content here */}
@@ -24,12 +35,13 @@ const Drawer = () => {
 
       <div className="drawer-side">
         <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay"></label>
-        <ul className="menu bg-base-200 text-base-content min-h-full w-80 px-4 pt-26 text-lg">
+        <div className="menu bg-base-200 text-base-content min-h-full w-80 px-4 pt-26 text-lg flex flex-col justify-between">
           {/* Sidebar content here */}
-          <div className="flex flex-col items-center justify-center">
+          <div className='flex flex-col justify-between mb-10'>
+            <div className="flex flex-col items-center justify-center">
             <img className="w-16 h-16" src="/assets/guest.png" alt="帳號頭像" />
-            <p className="mt-2 mb-1">訪客</p>
-            <p className="text-sm opacity-50 mb-10">myaccount@gmail.com</p>
+            <p className="mt-2 mb-1">{user.name}</p>
+            <p className="text-sm opacity-50 mb-10">{user.email}</p>
           </div>
           <li className="mb-2" id="account">
             <button
@@ -51,7 +63,12 @@ const Drawer = () => {
               }
             >我的訂單</button>
           </li>
-        </ul>
+          </div>
+          <button
+            onClick={() => dispatch(logout())}
+            className="text-sm mb-4 w-full border border-secondary text-secondary font-semibold py-2 rounded-lg hover:bg-secondary hover:text-white transition duration-200"
+          >登出</button>
+        </div>
       </div>
     </div>
   )

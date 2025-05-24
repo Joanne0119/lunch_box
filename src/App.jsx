@@ -4,6 +4,8 @@ import { useDispatch } from 'react-redux';
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase/firebase";
 import { setUser, logout as logoutAction} from "./redux/userSlice";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "./firebase/firebase"; 
 
 //css
 import './App.css'
@@ -24,25 +26,27 @@ function App() {
   const dispatch = useDispatch();
   // const navigate = useNavigate();
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        dispatch(setUser({ uid: user.uid, email: user.email }));
-        if (window.location.pathname === '/login') {
-          
-          // navigate('/'); 
-        }
+ useEffect(() => {
+  const unsubscribe = onAuthStateChanged(auth, async (user) => {
+    if (user) {
+      const userDocRef = doc(db, "users", user.uid);
+      const userSnap = await getDoc(userDocRef);
+
+      if (userSnap.exists()) {
+        const userData = userSnap.data();
+        dispatch(setUser(userData));
       } else {
-        dispatch(logoutAction());
-        if (window.location.pathname !== '/login') {
-          
-          // navigate('/login'); 
-        }
+        console.error("找不到使用者資料");
+        dispatch(setUser({ uid: user.uid, email: user.email })); // 至少保留基本資料
       }
-      console.log('onAuthStateChanged user:', user); 
-    });
-    return () => unsubscribe();
-  }, [dispatch]);
+    } else {
+      dispatch(logoutAction());
+    }
+    console.log('onAuthStateChanged user:', user); 
+  });
+
+  return () => unsubscribe();
+}, [dispatch]);
 
   // theme
   const [theme, setTheme] = useState(() => {

@@ -1,6 +1,15 @@
 import React from 'react'
+import { useSelector} from 'react-redux';
 
 const Account = () => {
+    const user = useSelector((state) => state.user.user) || null;
+    if (!user) {
+        return (
+            <div className="flex items-center justify-center h-screen">
+                <p className="text-lg font-bold">請先登入</p>
+            </div>
+        );
+    }
     return (
         <div className="flex flex-col items-center">
             {/* 大頭照 */}
@@ -9,40 +18,38 @@ const Account = () => {
                 <img className="w-10 h-10" src="/assets/camera.png" alt="更換頭像" />
             </button>
             {/* 帳戶資料 */}
-            <div className="flex flex-col items-center justify-center mt-10">
-                <div className="flex items-center">
-                    <label htmlFor="nickname" className="whitespace-nowrap mr-4">暱稱</label>
-                    <input
-                        id="nickname"
-                        type="text"
-                        placeholder="請輸入您的暱稱"
-                        defaultValue="訪客"
-                        className="input light:input-neutral dark:input-primary lg:w-lg sm:w-sm w-65"
-                    />
-                </div>
-                <div className="flex items-center mt-6">
-                    <label htmlFor="email" className="whitespace-nowrap mr-4">電子郵件地址</label>
-                    <input
-                        id="email"
-                        type="email"
-                        placeholder="請輸入您的電子郵件地址"
-                        defaultValue="myaccount@gmail.com"
-                        className="input light:input-neutral dark:input-primary lg:w-md sm:w-xs w-50"
-                    />
-                </div>
-                <div className="flex items-center mt-6">
-                    <label htmlFor="password" className="whitespace-nowrap mr-4">密碼</label>
-                    <input
-                        id="password"
-                        type="password"
-                        defaultValue="password"
-                        className="input light:input-neutral dark:input-primary lg:w-lg sm:w-sm w-65"
-                        disabled
-                    />
-                </div>
+           <div className="flex flex-col items-center justify-center mt-10 space-y-6">
+            {/* 使用者名稱 */}
+            <div className="flex items-center">
+                <label htmlFor="nickname" className="w-32 text-left mr-4">使用者名稱</label>
+                <input
+                id="nickname"
+                type="text"
+                placeholder="請輸入您的使用者名稱"
+                defaultValue={user.name}
+                className="input light:input-neutral dark:input-primary w-80"
+                />
             </div>
+
+            {/* 電子郵件地址 */}
+            <div className="flex items-center">
+                <label htmlFor="email" className="w-32 text-left mr-4">電子郵件地址</label>
+                <input
+                id="email"
+                type="email"
+                placeholder="請輸入您的電子郵件地址"
+                defaultValue={user.email}
+                className="input light:input-neutral dark:input-primary w-80"
+                />
+            </div>
+
+            </div>
+
             {/* 儲存變更按鈕 */}
-            <button className="btn btn-primary px-8 py-6 mt-20 lg:mb-0 mb-16">儲存變更</button>
+            <div className='flex flex-row items-center justify-center space-x-4'>
+                <button className="btn border-primary px-8 py-6 mt-20 lg:mb-0 text-primary mb-16 bg-transparent hover:translate-y-2 duration-300">變更密碼</button>
+                <button className="btn btn-primary px-8 py-6 mt-20 lg:mb-0 mb-16 hover:translate-y-2 duration-300">儲存變更</button>
+            </div>
         </div>
     )
 }

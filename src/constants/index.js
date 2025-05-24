@@ -13,11 +13,6 @@ export const navLinks = [
     id: 3,
     name: '食品型錄',
     href: '/catlog',
-  },
-  {
-    id: 4,
-    name: '個人頁面',
-    href: '/profile',
   }
 ];
 
