@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router';
 import { login, register } from '../../firebase/authService';
 import { useDispatch } from 'react-redux';
-import { setUser } from '../../redux/userSlice';
-
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../../firebase/firebase"; 
+import { setUser } from '../../redux/userSlice'; 
 const AuthForm = ({theme}) => {
   const [isSignUp, setIsSignUp] = useState(false);
   const toggleAuthMode = () => setIsSignUp(!isSignUp);
@@ -24,11 +25,19 @@ const AuthForm = ({theme}) => {
       const userCredential = await login(email, password);
       console.log("userCredential:", userCredential);
       const user = userCredential.user; 
-      // dispatch(setUser({ uid: user.uid, email: user.email }));
+      const userDocRef = doc(db, "users", user.uid);
+      const userSnap = await getDoc(userDocRef);
+      if (userSnap.exists()) {
+      const userData = userSnap.data();
+      console.log("從 Firestore 取得使用者資料:", userData);
 
-       
-      window.location.reload();
+      dispatch(setUser(userData));
+      // window.location.reload();
       navigate('/');
+    } else {
+      console.error("找不到使用者資料");
+      alert("找不到使用者資料，請聯絡管理員");
+    }
     } catch (error) {
       console.error(error);
       let errorMessage = "登入失敗，請稍後再試";
@@ -64,10 +73,12 @@ const AuthForm = ({theme}) => {
   return (
     <div className="flex items-center justify-center min-h-screen">
       <div className="w-full max-w-md bg-base-200 rounded-2xl shadow-lg p-8">
-        <form onSubmit={(e) => {
+        <form 
+          onSubmit={(e) => {
             e.preventDefault();
             isSignUp ? handleRegister() : handleLogin();
-          }}>
+          }}
+        >
           <div className="flex flex-col items-center mb-6">
           {
             theme === 'caramellatte' ?
@@ -165,7 +176,7 @@ const AuthForm = ({theme}) => {
           <button
             type="submit"
             className="w-full py-2 btn btn-primary text-base-100 rounded-full font-semibold transition"
-            onClick={() => isSignUp ? handleRegister() : handleLogin()} 
+            // onClick={() => isSignUp ? handleRegister() : handleLogin()} 
           >
             {isSignUp ? '註冊' : '登入'}
           </button>

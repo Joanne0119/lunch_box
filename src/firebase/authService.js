@@ -1,8 +1,7 @@
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { auth } from "./firebase";
 import { db } from "./firebase";
-import { collection } from "firebase/firestore";
-const usersRef = collection(db, "users");
+import { doc, setDoc} from "firebase/firestore";
 
 export const register = async (email, password, username) => {
   try {
@@ -14,15 +13,17 @@ export const register = async (email, password, username) => {
     username = username || "user";
 
     const user = res.user;
+    const displayName = username || "user";
 
-    // await usersRef.add({
-    //   uid: user.uid,
-    //   name: username,
-    //   email: user.email,
-    //   orderlist: [],
-    // });
+    await setDoc(doc(db, "users", user.uid), {
+      uid: user.uid,
+      name: displayName,
+      email: user.email,
+      orderlist: []  
+    });
+    console.log('Firestore 使用者資料建立完成');
 
-    //await signOut();
+    await logout();
     console.log('User signed out after signing up');
     return res;
   } catch (err) {

@@ -3,10 +3,11 @@ import { useSelector, useDispatch } from 'react-redux';
 
 const Hero = () => {
   const user = useSelector((state) => state.user.user) || null;
+  console.log("Hero user:", user);
   return (
     <div className='text-center h-screen pt-20'>
       {user ? (
-        <h1 className='text-3xl md:text-5xl font-bold pt-20'>為{user.email}打造專屬的美味便當</h1>
+        <h1 className='text-3xl md:text-5xl font-bold pt-20'>為{user.name}打造專屬的美味便當</h1>
       ) : (
         <h1 className='text-3xl md:text-5xl font-bold pt-20'>打造專屬的美味便當</h1>
       )}
