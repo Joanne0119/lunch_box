@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Account from './Account'
 import OrderRecord from './OrderRecord'
-import { useSearchParams } from 'react-router'
+import { useNavigate } from 'react-router'
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../../redux/userSlice';
 
@@ -9,6 +9,7 @@ const Drawer = () => {
   const [currentSelected, setCurrentSelected] = useState(1); // 記錄當前選擇的 drawer 按鈕＆頁面
   const user = useSelector((state) => state.user.user) || null;
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   if (!user) {
     return (
       <div className="flex items-center justify-center h-screen">
@@ -65,7 +66,11 @@ const Drawer = () => {
           </li>
           </div>
           <button
-            onClick={() => dispatch(logout())}
+            onClick={() => {
+              dispatch(logout())
+              window.location.reload() 
+              navigate('/')
+            }}
             className="text-sm mb-4 w-full border border-secondary text-secondary font-semibold py-2 rounded-lg hover:bg-secondary hover:text-white transition duration-200"
           >登出</button>
         </div>
