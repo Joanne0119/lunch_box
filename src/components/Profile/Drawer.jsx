@@ -68,7 +68,7 @@ const Drawer = () => {
           <button
             onClick={() => {
               dispatch(logout())
-              window.location.reload() 
+              // window.location.reload() 
               navigate('/')
             }}
             className="text-sm mb-4 w-full border border-secondary text-secondary font-semibold py-2 rounded-lg hover:bg-secondary hover:text-white transition duration-200"

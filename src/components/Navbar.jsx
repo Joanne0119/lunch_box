@@ -119,7 +119,7 @@ const Navbar = ({theme}) => {
                   ) : (
                     <Link
                       to="/login"
-                      className="md:ml-10 ml-8 md:text-lg transition-all text-base text-base-content font-semibold hover:text-primary focus:text-primary"
+                      className="ml-6 list-none btn btn-primary md:text-lg transition-all"
                     >
                       登入/註冊
                     </Link>
