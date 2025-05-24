@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import { BrowserRouter, Route, Routes } from 'react-router'
+import { BrowserRouter, Route, Routes, useNavigate } from 'react-router'
 import { useDispatch } from 'react-redux';
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase/firebase";
-import { setUser, logout } from "./redux/userSlice";
+import { setUser, logout as logoutAction} from "./redux/userSlice";
 
 //css
 import './App.css'
@@ -22,18 +22,27 @@ import MakeModel from './pages/MakeModel'
 function App() {
   // login and logout
   const dispatch = useDispatch();
+  // const navigate = useNavigate();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         dispatch(setUser({ uid: user.uid, email: user.email }));
+        if (window.location.pathname === '/login') {
+          
+          // navigate('/'); 
+        }
       } else {
-        dispatch(logout());
+        dispatch(logoutAction());
+        if (window.location.pathname !== '/login') {
+          
+          // navigate('/login'); 
+        }
       }
-      console.log(user);
+      console.log('onAuthStateChanged user:', user); 
     });
     return () => unsubscribe();
-  }, []);
+  }, [dispatch]);
 
   // theme
   const [theme, setTheme] = useState(() => {

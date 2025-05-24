@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import { login, register } from '../../firebase/authService';
 import { useDispatch } from 'react-redux';
 import { setUser } from '../../redux/userSlice';
@@ -16,29 +16,48 @@ const AuthForm = ({theme}) => {
   const [username, setUsername] = useState("");
 
   const dispatch = useDispatch();
-
+  const navigate = useNavigate(); 
+  
   const handleLogin = async () => {
+    console.log("handleSignIn");
     try {
       const userCredential = await login(email, password);
       console.log("userCredential:", userCredential);
       const user = userCredential.user; 
-      dispatch(setUser({ uid: user.uid, email: user.email }));
-      alert("登入成功");
+      // dispatch(setUser({ uid: user.uid, email: user.email }));
+
+       
+      window.location.reload();
+      navigate('/');
     } catch (error) {
-      console.error(error.message);
-      alert("登入失敗：" + error.message);
+      console.error(error);
+      let errorMessage = "登入失敗，請稍後再試";
+      if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
+        errorMessage = "帳號或密碼錯誤";
+      }
+      alert(errorMessage);
     }
   };
 
-  const handleRegister = async () => {
+   const handleRegister = async () => {
+    console.log("handleRegister");
     try {
       const userCredential = await register(email, password, username);
       const user = userCredential.user;
-      dispatch(setUser({ uid: user.uid, email: user.email, displayName: username }));
-      alert("註冊成功，請登入");
+      // dispatch(setUser({ uid: user.uid, email: user.email, displayName: username }));
+      alert("註冊成功");
+      
+      window.location.reload();
+      navigate('/login'); 
     } catch (error) {
-      console.error(error.message);
-      alert("註冊失敗：" + error.message);
+      console.error(error);
+      let errorMessage = "註冊失敗，請稍後再試";
+      if (error.code === 'auth/email-already-in-use') {
+        errorMessage = "此信箱已被使用";
+      } else if (error.code === 'auth/invalid-email') {
+          errorMessage = "信箱格式不正確";
+      }
+      alert(errorMessage);
     }
   };
 
@@ -146,10 +165,9 @@ const AuthForm = ({theme}) => {
           <button
             type="submit"
             className="w-full py-2 btn btn-primary text-base-100 rounded-full font-semibold transition"
+            onClick={() => isSignUp ? handleRegister() : handleLogin()} 
           >
-            <Link to={isSignUp ? '/login' : '/'}>
-                {isSignUp ? '註冊' : '登入'} 
-            </Link>
+            {isSignUp ? '註冊' : '登入'}
           </button>
 
           <div className="mt-6 text-center text-sm">
