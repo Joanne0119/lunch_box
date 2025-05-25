@@ -5,35 +5,36 @@ import { orderHints, ingredientToName } from '../constants';
 import { useDispatch } from 'react-redux';
 import { resetOrder } from '../redux/orderSlice';
 const Spline = React.lazy(() => import('@splinetool/react-spline'));
+
 const MakeModel = () => {
     const location = useLocation();
-    const { selectedIngredients } = location.state || {};
+    const { selectedIngredients, bentoName } = location.state || {};
     const [isOpen, setIsOpen] = useState(false);
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
     console.log(selectedIngredients);
 
-    const [bentoName, setBentoName] = useState('');
+    // const [bentoName, setBentoName] = useState('');
 
-    useEffect(() => {
-    if (selectedIngredients) {
-        const name = getBentoName(selectedIngredients);
-        setBentoName(name);
-    }
-    }, [selectedIngredients]);
+    // useEffect(() => {
+    // if (selectedIngredients) {
+    //     const name = getBentoName(selectedIngredients);
+    //     setBentoName(name);
+    // }
+    // }, [selectedIngredients]);
 
-    function getBentoName(selectedIngredients) {
-        const step2 = selectedIngredients.step2 || [];
-        for (const item of step2) {
-            const names = ingredientToName[item.splineName];
-            if (names) {
-            const randomIndex = Math.floor(Math.random() * names.length);
-            return names[randomIndex];
-            }
-        }
-        return "就是好吃的便當";
-    }
+    // function getBentoName(selectedIngredients) {
+    //     const step2 = selectedIngredients.step2 || [];
+    //     for (const item of step2) {
+    //         const names = ingredientToName[item.splineName];
+    //         if (names) {
+    //         const randomIndex = Math.floor(Math.random() * names.length);
+    //         return names[randomIndex];
+    //         }
+    //     }
+    //     return "就是好吃的便當";
+    // }
 
     function onSplineLoad(spline) {
         spline.findObjectByName('Veg1') ? (spline.findObjectByName('Veg1').visible = false ): undefined;

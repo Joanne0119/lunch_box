@@ -1,10 +1,28 @@
-import React from 'react'
-import orderData from '@/json/orderData.json' // 假設訂單資料存放在這個路徑
+import React, { useState, useEffect } from 'react'
 import OrderRecordCard from './OrderRecordCard'
 import { useSelector} from 'react-redux';
+import { getDoc, doc } from 'firebase/firestore'
+import { db } from '../../firebase/firebase';
+
 
 const OrderRecord = () => {
     const user = useSelector((state) => state.user.user) || null;
+    const [orders, setOrders] = useState([]);
+
+    const fetchOrders = async () => {
+    try {
+        const userDoc = await getDoc(doc(db, "users", user.uid));
+        const data = userDoc.data();
+        setOrders(data.orderlist || []);
+    } catch (error) {
+        console.error("抓訂單資料失敗：", error);
+    }
+    };
+
+    useEffect(() => {
+    fetchOrders();
+    }, []);
+
     if (!user) {
         return <div className="p-6">請先登入以查看訂單記錄。</div>;
     }
@@ -22,19 +40,21 @@ const OrderRecord = () => {
         );
     }
     return (
-        
         <div className="overflow-y-auto h-[calc(100vh-9rem)] px-6">
+            {/* <button 
+                className='btn btn-secondary mb-4 ml-6' 
+                onClick={fetchOrders}>
+                刷新訂單資料
+            </button> */}
             {/* 訂單List */}
-            {
-                user.orderlist.map(
-                    (order) =>
-                        <OrderRecordCard
-                            order={order}
-                            key={order.id}
-                        />
-                )
-            }
+            {orders.map((order) => (
+                <OrderRecordCard
+                order={order}
+                key={order.createdAt}
+                />
+            ))}
         </div>
+       
     )
 }
 

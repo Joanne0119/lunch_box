@@ -3,10 +3,13 @@ import Step from '../components/Make/Step'
 import Order from '../components/Make/Order'
 import OrderDetails from '../components/Make/OrderDetails'
 import ConfirmOrder from '../components/Make/ConfirmOrder'
-import { ingredients, orderHints } from '../constants'
+import { ingredients, orderHints, ingredientToName } from '../constants'
 import { useNavigate } from 'react-router'
 import { useSelector, useDispatch } from 'react-redux'
+import { db } from '../firebase/firebase'
 import { setStepIngredients, toggleIngredient } from '../redux/orderSlice'
+import { doc, updateDoc, arrayUnion } from 'firebase/firestore'
+import { addOrderToUser } from '../redux/userSlice'
 
 const Make = () => {
   const navigate = useNavigate();
@@ -16,7 +19,7 @@ const Make = () => {
   const [step, setStep] = useState(1); // 目前的步驟
   const dispatch = useDispatch()
   const selectedIngredients = useSelector(state => state.order.selectedIngredients)
-
+  const user = useSelector(state => state.user.user) || null;
     
   const [isOrderConfirmed, setIsOrderConfirmed] = useState(false);
 
@@ -25,35 +28,32 @@ const Make = () => {
 
   // 設定選擇的食材
   const handleSelectIngredient = (ingredient) => {
-    // setSelectedIngredients((prev) => {
-    //   const newSelection = { ...prev };
-
-    //   if (!newSelection.step3) newSelection.step3 = [];
-    //   if (!newSelection.step4) newSelection.step4 = [];
-
-    //   if (step === 1 || step === 2) {
-    //     newSelection[`step${step}`] = [ingredient]; // 只能選一個
-    //   } else if (step === 3) {
-    //     if (newSelection.step3.some((item) => item.id === ingredient.id)) {
-    //       newSelection.step3 = newSelection.step3.filter((item) => item.id !== ingredient.id);
-    //     } else if (newSelection.step3.length < 4) {
-    //       newSelection.step3 = [...newSelection.step3, ingredient];
-    //     }
-    //   } else if (step === 4) {
-    //     if (newSelection.step4.some((item) => item.id === ingredient.id)) {
-    //       newSelection.step4 = newSelection.step4.filter((item) => item.id !== ingredient.id);
-    //     } else {
-    //       newSelection.step4 = [...newSelection.step4, ingredient];
-    //     }
-    //   }
-
-    //   return newSelection;
-    // });
     dispatch(toggleIngredient({
       step: `step${step}`,
       ingredient
     }))
   };
+
+  const [bentoName, setBentoName] = useState('');
+  
+  useEffect(() => {
+  if (selectedIngredients) {
+      const name = getBentoName(selectedIngredients);
+      setBentoName(name);
+  }
+  }, [selectedIngredients]);
+
+  function getBentoName(selectedIngredients) {
+      const step2 = selectedIngredients.step2 || [];
+      for (const item of step2) {
+          const names = ingredientToName[item.splineName];
+          if (names) {
+          const randomIndex = Math.floor(Math.random() * names.length);
+          return names[randomIndex];
+          }
+      }
+      return "就是好吃的便當";
+  }
 
   const handleNextStep = () => {
     if (step < 4) {
@@ -72,11 +72,14 @@ const Make = () => {
   };
 
   const goto3DModelPage = () => {
-    navigate('/makeresult', { state: { selectedIngredients } });
+    navigate('/makeresult', { state: { selectedIngredients, bentoName } });
   }
 
-  const handleClick = () => {
+  const handleClick = async () => {
     if (step === 5) {
+      if (user && user.uid) {
+        await saveOrderToFirebase()
+      }
       goto3DModelPage();
     } else {
       handleNextStep();
@@ -93,6 +96,32 @@ const Make = () => {
     if (step === 3) return data.length < 4
     return false
   };
+
+  const today = new Date().toISOString(); 
+
+  const saveOrderToFirebase = async () => {
+  if (!user || !user.uid) return
+
+  const userRef = doc(db, "users", user.uid)
+
+  const newOrder = {
+    ingredients: selectedIngredients,
+    createdAt: today,
+    name: bentoName 
+  }
+
+  try {
+    await updateDoc(userRef, {
+      orderlist: arrayUnion(newOrder)
+    })
+
+    // 同步 Redux user 狀態
+    dispatch(addOrderToUser(newOrder))
+    console.log("Order saved to Firebase and Redux")
+  } catch (error) {
+    console.error("Error saving order: ", error)
+  }
+}
 
   return (
     <div ref={topRef} className='pt-25 flex flex-col min-h-screen p-8'>
