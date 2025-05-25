@@ -6,6 +6,7 @@ import { auth } from "./firebase/firebase";
 import { setUser, logout as logoutAction} from "./redux/userSlice";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "./firebase/firebase"; 
+import { Toaster } from 'react-hot-toast';
 
 //css
 import './App.css'
@@ -64,6 +65,7 @@ function App() {
 
   return (
     <BrowserRouter>
+      <Toaster position="top-center" />
       <Navbar theme={theme} />
       <Routes>
         <Route path="/" element={<Home />} />

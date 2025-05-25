@@ -80,3 +80,5 @@ export const ingredientToName = {
   tofu: ["柔情似豆腐便當","豆你玩便當", "豆腐方塊便當"],
   simon: ["鮭心似魚便當", "鮭鮭便當", "鮭喜發財便當"],
 };
+
+export const ingredientChooseCount = [1, 1, 4, 2]; // 每個步驟選擇的食材數量

@@ -1,9 +1,16 @@
 import React from 'react'
-import { orderHints } from '../../constants'
+import { orderHints, ingredientChooseCount } from '../../constants'
 import { useSelector } from 'react-redux'
 
 const OrderDetails = ({ isOpen, setIsOpen}) => {
   const selectedIngredients = useSelector(state => state.order.selectedIngredients)
+  const totalCalories = Object.values(selectedIngredients).reduce((total, step) => {
+    return total + step.reduce((stepTotal, ingredient) => {
+      return stepTotal + (ingredient.calories || 0);
+    }
+    , 0);
+  }
+  , 0);
   return (
     <>
       {/* 手機版的展開按鈕 */}
@@ -25,6 +32,8 @@ const OrderDetails = ({ isOpen, setIsOpen}) => {
           md:translate-x-0 md:fixed md:right-5 md:bottom-20 md:w-1/4
         `}
       > 
+        <h3 className="text-base mt-2 font-bold">總熱量： <span className="text-2xl font-bold">{totalCalories} kcal</span></h3>
+        
         <h3 className="text-base mt-2 font-bold">目前已選</h3>
         {/* 動態顯示已選食材 */}
         <ul className="menu text-sm">
@@ -33,10 +42,14 @@ const OrderDetails = ({ isOpen, setIsOpen}) => {
           .map((step) => (
               selectedIngredients[step].length > 0 && (
                   <li key={step}>
-                    <p className='font-semibold'> { orderHints[step.slice(-1) - 1].slice(4)}</p>
+                    <div  className='list-none pb-2 flex flex-row'>
+                        <p className='font-semibold'> { orderHints[step.slice(-1) - 1].slice(4)}</p>
+                        <span className='text-xs text-primary'>(可選 {ingredientChooseCount[step.slice(-1) - 1]} / <span className='font-bold'>已選 {selectedIngredients[step].length}</span>)</span>
+                    </div>
+                    
                   <ul key={step} className="px-2">
                     {selectedIngredients[step].map((item) => (
-                      <li className='text-base-content/80' key={item.id}>{item.name}</li>
+                      <li className='text-primary/60' key={item.id}>{item.name}</li>
                     ))}
                   </ul>
                   </li>
