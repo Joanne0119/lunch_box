@@ -175,7 +175,7 @@ const AuthForm = ({theme}) => {
 
           <button
             type="submit"
-            className="w-full py-2 btn btn-primary text-base-100 rounded-full font-semibold transition"
+            className="w-full py-2 btn btn-primary text-white hover:text-gray-300 rounded-full font-semibold transition"
             // onClick={() => isSignUp ? handleRegister() : handleLogin()} 
           >
             {isSignUp ? '註冊' : '登入'}

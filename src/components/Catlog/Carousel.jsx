@@ -33,8 +33,8 @@ const Carousel = ({ ingredient }) => {
                 ))}
             </div>
             <div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
-                <button onClick={prev} className="btn btn-circle bg-base-300 border-base-300">❮</button>
-                <button onClick={next} className="btn btn-circle bg-base-300 border-base-300">❯</button>
+                <button onClick={prev} className="btn btn-circle bg-base-300 border-base-300 hover:brightness-95">❮</button>
+                <button onClick={next} className="btn btn-circle bg-base-300 border-base-300 hover:brightness-95">❯</button>
             </div>
         </div>
     )

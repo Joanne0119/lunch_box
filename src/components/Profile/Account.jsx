@@ -47,8 +47,8 @@ const Account = () => {
 
             {/* 儲存變更按鈕 */}
             <div className='flex flex-row items-center justify-center space-x-4'>
-                <button className="btn border-primary px-8 py-6 mt-20 lg:mb-0 text-primary mb-16 bg-transparent hover:translate-y-2 duration-300">變更密碼</button>
-                <button className="btn btn-primary px-8 py-6 mt-20 lg:mb-0 mb-16 hover:translate-y-2 duration-300">儲存變更</button>
+                <button className="btn border-primary bg-transparent px-8 py-6 mt-20 lg:mb-0 text-primary mb-16">變更密碼</button>
+                <button className="btn btn-primary px-8 py-6 mt-20 lg:mb-0 mb-16">儲存變更</button>
             </div>
         </div>
     )

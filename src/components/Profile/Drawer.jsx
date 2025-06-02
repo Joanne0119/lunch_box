@@ -69,9 +69,9 @@ const Drawer = () => {
             onClick={() => {
               dispatch(logout())
               // window.location.reload() 
-              navigate('/')
+              // navigate('/')
             }}
-            className="text-sm mb-4 w-full border border-secondary text-secondary font-semibold py-2 rounded-lg hover:bg-secondary hover:text-white transition duration-200"
+            className="text-sm mb-4 w-full btn btn-outline border-accent text-accent font-semibold py-2 rounded-lg hover:brightness-80 transition-all duration-300 ease-in-out"
           >登出</button>
         </div>
       </div>

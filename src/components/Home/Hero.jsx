@@ -15,7 +15,7 @@ const Hero = () => {
         我們提供個性化的便當選擇，讓您自由搭配喜愛的食材，享受健康美味的餐點。透過 3D 模擬技術，即時預覽便當外觀，讓每一餐都充滿驚喜！
       </p>
       <div className='flex justify-center align-center mt-10 sm:flex-row flex-col'>
-        <button className='btn btn-accent text-white hover:text-gray-300 text-medium md:mx-3 mx-10 my-2'>
+        <button className='btn btn-accent text-white hover:brightness-80 text-medium md:mx-3 mx-10 my-2'>
           {
             user ? (
               <Link to="/make">
@@ -28,7 +28,7 @@ const Hero = () => {
             )
           }
         </button>
-        <button className='btn btn-secondary text-white hover:text-gray-300 text-medium md:mx-3 mx-10 my-2'>
+        <button className='btn btn-secondary text-white hover:brightness-80 text-medium md:mx-3 mx-10 my-2'>
           {
             user ? (
               <a href="#about">

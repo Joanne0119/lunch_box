@@ -19,7 +19,7 @@ const EndSection = () => {
         <br />
         立即開始打造屬於你的專屬便當，讓每一餐都成為驚喜的旅程！
       </p>
-      <button className="btn btn-secondary text-white hover:text-gray-300 text-medium">
+      <button className="btn btn-secondary text-white hover:brightness-80 text-medium">
         <Link to="/make">
           開始製作
         </Link>

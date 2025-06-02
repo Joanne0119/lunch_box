@@ -25,7 +25,7 @@ const Feature = () => {
                                 </h2>
                                 <p>我們提供個性化的便當選擇，讓您自由搭配喜愛的食材，享受健康美味的餐點。</p>
                                 <div className="card-actions">
-                                    <button className="btn btn-secondary text-white hover:text-gray-300 text-medium mt-2">
+                                    <button className="btn btn-secondary text-white hover:brightness-80 text-medium mt-2">
                                         {
                                             user ? (
                                                 <Link to="/make">

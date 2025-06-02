@@ -68,7 +68,7 @@ const Make = () => {
           </div>
         </span>
       ), {
-        duration: 10000,
+        duration: 10000, 
       });
     }
     return;
@@ -196,8 +196,8 @@ const Make = () => {
           <OrderDetails className="fixed bottom-5" isOpen={isOpen} setIsOpen={setIsOpen}/>
         </div>
       <div className='mb-10 flex justify-around max-w-3/4 w-full mx-auto mt-6 px-4 items-start md:ml-2'>
-      <button className='btn bg-transparent border-primary text-primary' onClick={handlePrevStep} disabled={step === 1}>上一步</button>
-        <button className={step === 5  ? 'btn btn-success' : 'btn btn-primary'} onClick={handleClick} disabled={isDisabled(step)}>
+      <button className='btn btn-outline border-primary text-primary hover:brightness-80 disabled:border-transparent disabled:text-stone-400' onClick={handlePrevStep} disabled={step === 1}>上一步</button>
+        <button className={step === 5  ? 'btn btn-success hover:brightness-80' : 'btn btn-primary hover:brightness-80'} onClick={handleClick} disabled={isDisabled(step)}>
           {step === 5 ? "確認訂單" : "下一步"}
         </button>
       </div>

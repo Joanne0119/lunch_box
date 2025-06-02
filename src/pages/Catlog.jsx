@@ -1,4 +1,4 @@
-import { React, useState } from 'react'
+import React, { useState } from 'react'
 import IngredientList from '../components/Catlog/IngredientList'
 import { ingredients } from '../constants'
 import { useSearchParams, useNavigate } from "react-router";
@@ -21,7 +21,7 @@ const Catlog = () => {
         {/* 顯示搜尋結果 */}
         {searchInput == "" ?
           <></> :
-          <IngredientList ingredients={ingredients} searchInput={searchInput} /> 
+          <IngredientList ingredients={ingredients} searchInput={searchInput} />
         }
       </div>
       { /* 食材分類與卡片 */}

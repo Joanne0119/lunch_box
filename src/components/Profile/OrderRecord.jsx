@@ -53,6 +53,7 @@ const OrderRecord = () => {
                 key={order.createdAt}
                 />
             ))}
+            <p className="opacity-70 my-8">已滑至最新的便當紀錄</p>
         </div>
        
     )

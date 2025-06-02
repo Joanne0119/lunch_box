@@ -46,7 +46,7 @@ const CatlogDetail = () => {
           </div>
           <div>
             <button
-              className="btn btn-primary hover:text-gray-300"
+              className="btn btn-primary hover:brightness-80"
               onClick={() => navigate(`/catlog?tab=${currentTab}&search=${currentSearch}`)}
             >返回</button>
           </div>
