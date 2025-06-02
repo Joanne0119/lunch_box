@@ -101,7 +101,7 @@ const MakeModel = () => {
             <div className='w-full flex flex-row justify-start items-center mt-5'>
                 <h1 className='text-4xl font-bold mb-4 pl-10 pt-4'>{bentoName}</h1>
                 <button
-                className="btn btn-primary mx-10 my-2 mb-4 "
+                className="btn btn-secondary text-white hover:text-gray-300 mx-10"
                 onClick={() => {
                     dispatch(resetOrder());
                     navigate('/make')

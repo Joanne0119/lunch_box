@@ -82,7 +82,7 @@ const Navbar = ({theme}) => {
                       ) : (
                         <Link
                           to="/login"
-                          className="list-none btn btn-primary md:text-lg transition-all"
+                          className="list-none ml-6 list-none btn btn-accent text-white hover:text-gray-300 md:text-lg transition-all"
                         >
                           登入/註冊
                         </Link>
@@ -119,7 +119,7 @@ const Navbar = ({theme}) => {
                   ) : (
                     <Link
                       to="/login"
-                      className="ml-6 list-none btn btn-primary md:text-lg transition-all"
+                      className="ml-6 list-none btn btn-accent text-white hover:text-gray-300 md:text-lg transition-all"
                     >
                       登入/註冊
                     </Link>
