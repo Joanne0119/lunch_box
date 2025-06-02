@@ -7,7 +7,7 @@ const Catlog = () => {
   const navigate = useNavigate();
   const [queryParams] = useSearchParams();
   const tab = parseInt(queryParams.get("tab") || "1");
-  const search = queryParams.get("search");
+  const search = queryParams.get("search") || "";
   const [searchInput, setSearchInput] = useState(search); // 記錄使用者在搜尋欄裡的輸入
 
   return (
@@ -16,7 +16,7 @@ const Catlog = () => {
       <div className="mt-32 mb-8">
         <label className="input w-full">
           <svg className="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g strokeLinejoin="round" strokeLinecap="round" strokeWidth="2.5" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></g></svg>
-          <input type="search" required placeholder="搜尋食材" value={searchInput} onChange={(e) => setSearchInput(e.target.value)} />
+          <input type="search" placeholder="搜尋食材" value={searchInput} onChange={(e) => setSearchInput(e.target.value)} />
         </label>
         {/* 顯示搜尋結果 */}
         {searchInput == "" ?
