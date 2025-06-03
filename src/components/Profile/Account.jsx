@@ -5,13 +5,13 @@ const Account = () => {
     const user = useSelector((state) => state.user.user) || null;
     if (!user) {
         return (
-            <div className="flex items-center justify-center h-screen">
+            <div className="flex items-center justify-center h-screen transition-colors duration-500 ease-in-out">
                 <p className="text-lg font-bold">請先登入</p>
             </div>
         );
     }
     return (
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center transition-colors duration-500 ease-in-out">
             {/* 大頭照 */}
             <img className="w-30 h-30 mt-6 relative" src="/assets/guest.png" alt="帳號頭像" />
             <button className="bg-transparent border-none cursor-pointer absolute mt-26 ml-28" title="更換頭像">

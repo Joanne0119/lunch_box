@@ -6,7 +6,7 @@ import Feature from '../components/Home/Feature'
 import EndSection from '../components/Home/EndSection'
 const Home = () => {
   return (
-    <div>
+    <div className="transition-colors duration-500 ease-in-out">
       <HomeSpline />
       <Hero />
       <div className='h-screen'></div>

@@ -8,7 +8,7 @@ const Footer = ({ theme }) => {
     const dispatch = useDispatch();
 
     return (
-        <footer className="footer sm:footer-horizontal bg-base-300 p-10">
+        <footer className="footer sm:footer-horizontal bg-base-300 p-10 transition-colors duration-500 ease-in-out">
             <div className='flex flex-col items-center'>
                 {
                     theme === 'caramellatte' ?

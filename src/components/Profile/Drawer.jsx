@@ -12,14 +12,14 @@ const Drawer = () => {
   const navigate = useNavigate();
   if (!user) {
     return (
-      <div className="flex items-center justify-center h-screen">
+      <div className="flex items-center justify-center h-screen transition-colors duration-500 ease-in-out">
         <p className="text-lg font-bold">請先登入</p>
       </div>
     );
   }
 
   return (
-    <div className="drawer lg:drawer-open transition duration-300 ease-in-out ">
+    <div className="drawer lg:drawer-open transition-all duration-500 ease-in-out">
 
       <input id="my-drawer" type="checkbox" className="drawer-toggle" />
       {/* Page content here */}
@@ -71,7 +71,7 @@ const Drawer = () => {
               // window.location.reload() 
               // navigate('/')
             }}
-            className="text-sm mb-4 w-full btn btn-outline border-accent text-accent font-semibold py-2 rounded-lg hover:brightness-80 transition-all duration-300 ease-in-out"
+            className="text-sm mb-4 w-full btn btn-outline border-accent text-accent font-semibold py-2 rounded-lg hover:brightness-80"
           >登出</button>
         </div>
       </div>

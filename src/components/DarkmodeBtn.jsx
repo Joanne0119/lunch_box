@@ -16,7 +16,7 @@ const DarkmodeBtn = ({toggleTheme, theme}) => {
 
 
   return (
-    <div className="fixed bottom-20 right-8">
+    <div className="fixed bottom-20 right-8 transition-colors duration-500 ease-in-out">
       <label htmlFor="switch" className="btn btn-circle p-6 swap swap-rotate">
       
       <input

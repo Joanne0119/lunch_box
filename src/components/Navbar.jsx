@@ -54,10 +54,10 @@ const Navbar = ({theme}) => {
   }, []);
 
   return (
-    <header ref={navRef} className={`bg-base-300 fixed top-0 left-0 right-0 z-50 px-8 transition-all duration-1000 ease-in-out  ${scrolled ? 'opacity-0 py-2 pointer-events-none' : 'opacity-100 py-4'}`}>
+    <header ref={navRef} className={`bg-base-300 fixed top-0 left-0 right-0 z-50 px-8 transition-colors duration-500 ease-in-out  ${scrolled ? 'opacity-0 py-2 pointer-events-none' : 'opacity-100 py-4'}`}>
         <div className='max-w-7xl mx-auto'>
             <div className='flex justify-between'>
-                <Link to='/' className='font-bold flex items-center gap-2 transition-colors'>
+                <Link to='/' className='font-bold flex items-center gap-2'>
                     {
                       theme === 'caramellatte' ?
                       <img src="/assets/logoLight.png" alt="Logo" className='h-10' />
@@ -82,7 +82,7 @@ const Navbar = ({theme}) => {
                       ) : (
                         <Link
                           to="/login"
-                          className="list-none ml-6 btn btn-accent text-white hover:text-gray-300 md:text-lg transition-all"
+                          className="list-none ml-6 btn btn-accent text-white hover:text-gray-300 md:text-lg"
                         >
                           登入/註冊
                         </Link>
@@ -119,7 +119,7 @@ const Navbar = ({theme}) => {
                   ) : (
                     <Link
                       to="/login"
-                      className="ml-6 list-none btn btn-accent text-white hover:text-gray-300 md:text-lg transition-all"
+                      className="ml-6 list-none btn btn-accent text-white hover:text-gray-300 md:text-lg"
                     >
                       登入/註冊
                     </Link>
@@ -129,7 +129,7 @@ const Navbar = ({theme}) => {
             </div>
 
         </div>
-        <div className={`list-none absolute left-0 right-0 bg-base-300 backdrop-blur-sm transition-all duration-500 ease-in-out overflow-hidden z-20 mx-auto sm:hidden block ${isOpen ? 'max-h-screen' : 'max-h-0'} ${scrolled ? 'opacity-0' : 'opacity-100'}`}>
+        <div className={`list-none absolute left-0 right-0 bg-base-300 backdrop-blur-sm overflow-hidden z-20 mx-auto sm:hidden block ${isOpen ? 'max-h-screen' : 'max-h-0'} ${scrolled ? 'opacity-0' : 'opacity-100'}`}>
             <nav className='p-5'>
                 <NavItems />  
             </nav>

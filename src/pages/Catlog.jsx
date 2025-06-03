@@ -11,7 +11,7 @@ const Catlog = () => {
   const [searchInput, setSearchInput] = useState(search); // 記錄使用者在搜尋欄裡的輸入
 
   return (
-    <div className="h-min-screen mx-16 mb-32">
+    <div className="h-min-screen mx-16 mb-32 transition-colors duration-500 ease-in-out">
       { /* 搜尋欄 */}
       <div className="mt-32 mb-8">
         <label className="input w-full">
@@ -26,7 +26,7 @@ const Catlog = () => {
       </div>
       { /* 食材分類與卡片 */}
       {searchInput == "" ?
-        <div role="tablist" className="tabs tabs-border transition duration-300 ease-in-out">
+        <div role="tablist" className="tabs tabs-border">
           <input type="radio" name="my_tabs" className="tab" aria-label="澱粉基底" defaultChecked={tab == 1} onChange={() => navigate("/catlog?tab=1")} />
           <div role="tabpanel" className="tab-content">
             <IngredientList ingredients={ingredients} step={1} searchInput={searchInput} />

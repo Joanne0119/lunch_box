@@ -97,7 +97,7 @@ const MakeModel = () => {
     }
     
     return (
-        <div className='h-screen flex flex-col justify-start items-start pt-20 relative'>
+        <div className='h-screen flex flex-col justify-start items-start pt-20 relative transition-all duration-500 ease-in-out'>
             <div className='w-full flex flex-row justify-start items-center mt-5'>
                 <h1 className='text-4xl font-bold mb-4 pl-10 pt-4'>{bentoName}</h1>
                 <button

@@ -18,7 +18,7 @@ const CatlogDetail = () => {
   const ingredient = ingredients[`step${currentTab}`]?.[number - 1]; // 取得食材資料
 
   return (
-    <div className="h-min-screen mx-16 mb-32">
+    <div className="h-min-screen mx-16 mb-32 transition-colors duration-500 ease-in-out">
       {/* 搜尋欄
       <div className="mt-32 mb-8">
         <label className="input w-full">
