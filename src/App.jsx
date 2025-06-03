@@ -3,10 +3,11 @@ import { BrowserRouter, Route, Routes, useNavigate } from 'react-router'
 import { useDispatch } from 'react-redux';
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase/firebase";
-import { setUser, logout as logoutAction} from "./redux/userSlice";
+import { setUser, logout as logoutAction } from "./redux/userSlice";
 import { doc, getDoc } from "firebase/firestore";
-import { db } from "./firebase/firebase"; 
+import { db } from "./firebase/firebase";
 import { Toaster } from 'react-hot-toast';
+import { AnimatePresence } from 'motion/react';
 
 //css
 import './App.css'
@@ -27,27 +28,27 @@ function App() {
   const dispatch = useDispatch();
   // const navigate = useNavigate();
 
- useEffect(() => {
-  const unsubscribe = onAuthStateChanged(auth, async (user) => {
-    if (user) {
-      const userDocRef = doc(db, "users", user.uid);
-      const userSnap = await getDoc(userDocRef);
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        const userDocRef = doc(db, "users", user.uid);
+        const userSnap = await getDoc(userDocRef);
 
-      if (userSnap.exists()) {
-        const userData = userSnap.data();
-        dispatch(setUser(userData));
+        if (userSnap.exists()) {
+          const userData = userSnap.data();
+          dispatch(setUser(userData));
+        } else {
+          console.error("找不到使用者資料");
+          dispatch(setUser({ uid: user.uid, email: user.email })); // 至少保留基本資料
+        }
       } else {
-        console.error("找不到使用者資料");
-        dispatch(setUser({ uid: user.uid, email: user.email })); // 至少保留基本資料
+        dispatch(logoutAction());
       }
-    } else {
-      dispatch(logoutAction());
-    }
-    console.log('onAuthStateChanged user:', user); 
-  });
+      console.log('onAuthStateChanged user:', user);
+    });
 
-  return () => unsubscribe();
-}, [dispatch]);
+    return () => unsubscribe();
+  }, [dispatch]);
 
   // theme
   const [theme, setTheme] = useState(() => {
@@ -64,21 +65,23 @@ function App() {
   };
 
   return (
-    <BrowserRouter>
-      <Toaster position="top-center" />
-      <Navbar theme={theme} />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/make" element={<Make />} />
-        <Route path="/makeresult" element={<MakeModel />} />
-        <Route path="/catlog" element={<Catlog />} />
-        <Route path="/catlog/:ingredientType" element={<CatlogDetail />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/login" element={<Login theme={theme} />} />
-      </Routes>
-      <DarkmodeBtn toggleTheme={toggleTheme} theme={theme} />
-      <Footer theme={theme} />
-    </BrowserRouter>
+    <AnimatePresence mode="wait">
+      <BrowserRouter>
+        <Toaster position="top-center" />
+        <Navbar theme={theme} />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/make" element={<Make />} />
+          <Route path="/makeresult" element={<MakeModel />} />
+          <Route path="/catlog" element={<Catlog />} />
+          <Route path="/catlog/:ingredientType" element={<CatlogDetail />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/login" element={<Login theme={theme} />} />
+        </Routes>
+        <DarkmodeBtn toggleTheme={toggleTheme} theme={theme} />
+        <Footer theme={theme} />
+      </BrowserRouter>
+    </AnimatePresence>
   )
 }
 
