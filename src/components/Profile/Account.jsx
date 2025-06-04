@@ -94,7 +94,7 @@ const Account = () => {
             <div className='flex flex-row items-center justify-center space-x-4'>
                 <button className="btn border-primary bg-transparent px-8 py-6 mt-20 lg:mb-0 text-primary mb-16">變更密碼</button>
                 <button 
-                    className="btn btn-primary px-8 py-6 mt-20 lg:mb-0 mb-16"
+                    className="btn btn-primary px-8 py-6 mt-20 lg:mb-0 mb-16 hover:brightness-80"
                     onClick={handleSaveChanges}
                 >儲存變更</button>
             </div>

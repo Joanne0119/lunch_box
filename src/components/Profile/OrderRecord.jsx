@@ -26,7 +26,7 @@ const OrderRecord = () => {
     }
 
     if (isLoading) {
-        return <div className="p-6 transition-colors duration-500 ease-in-out">loading...</div>;
+        return <div className="p-6 transition-colors duration-500 ease-in-out">載入中...</div>;
     }
 
     if (isError) {
