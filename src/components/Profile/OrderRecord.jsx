@@ -1,31 +1,38 @@
 import React, { useState, useEffect } from 'react'
 import OrderRecordCard from './OrderRecordCard'
 import { useSelector} from 'react-redux';
-import { getDoc, doc } from 'firebase/firestore'
-import { db } from '../../firebase/firebase';
-
+// import { getDoc, doc } from 'firebase/firestore'
+// import { db } from '../../firebase/firebase';
+import { useQuery } from '@tanstack/react-query';
+import { fetchOrders } from '../../api/orders'; 
 
 const OrderRecord = () => {
     const user = useSelector((state) => state.user.user) || null;
-    const [orders, setOrders] = useState([]);
 
-    const fetchOrders = async () => {
-    try {
-        const userDoc = await getDoc(doc(db, "users", user.uid));
-        const data = userDoc.data();
-        setOrders(data.orderlist || []);
-    } catch (error) {
-        console.error("抓訂單資料失敗：", error);
-    }
-    };
+    const {
+        data: orders = [],
+        isLoading,
+        isError,
+        refetch
+    } = useQuery({
+        queryKey: ['orders', user?.uid],
+        queryFn: () => fetchOrders(user.uid),
+        enabled: !!user, // 如果沒登入，就不跑 query
+    });
 
-    useEffect(() => {
-    fetchOrders();
-    }, []);
 
     if (!user) {
         return <div className="p-6 transition-colors duration-500 ease-in-out">請先登入以查看訂單記錄。</div>;
     }
+
+    if (isLoading) {
+        return <div className="p-6 transition-colors duration-500 ease-in-out">載入中...</div>;
+    }
+
+    if (isError) {
+        return <div className="p-6 text-red-500 p-6 transition-colors duration-500 ease-in-out">載入失敗，請稍後再試。</div>;
+    }
+
     if (!user.orderlist || user.orderlist.length === 0) {
         return (
             <div className="flex flex-col items-center justify-center h-[calc(100vh-9rem)] transition-colors duration-500 ease-in-out">
