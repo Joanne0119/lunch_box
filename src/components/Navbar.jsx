@@ -68,7 +68,7 @@ const Navbar = ({theme}) => {
                     
                 </Link>
                 <div className='flex items-center sm:hidden flex'>
-                    <div className='sm:hidden flex'>
+                    <div className='list-none sm:hidden flex'>
                       <li key="5" className='text-neutral-400 font-generalsans max-sm:hover:bg-base-300 max-sm:w-full max-sm:rounded-md py-2 max-sm:px-5'>
                         {user ? (
                         <Link

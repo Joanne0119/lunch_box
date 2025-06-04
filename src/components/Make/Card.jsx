@@ -2,8 +2,11 @@ import React from 'react'
 
 const Card = ({ item, isSelected, onSelect }) => {
   return (
-    <div 
-      className={`card bg-base-200 m-4 shadow-sm cursor-pointer transition-all duration-300 ${isSelected ? "border-4 border-base-primary" : ""}`}
+    <div
+      className={
+        `card bg-base-200 m-4 shadow-sm cursor-pointer transition-all duration-300 relative 
+        ${isSelected ? "border-4 border-base-primary" : "transform transition-transform duration-300 hover:scale-105 hover:shadow-md"}`
+      }
       onClick={onSelect}
     >
       <figure className='p-2'>

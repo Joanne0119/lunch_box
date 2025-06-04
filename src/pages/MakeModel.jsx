@@ -110,14 +110,14 @@ const MakeModel = () => {
                 製作新便當
                 </button>
             </div>
-            <div className='w-full md:w-96 ml-10w-full md:w-96 absolute top-40 md:top-24 md:right-10 ml-10'>
+            <div className='w-full md:w-96 absolute top-45 md:top-26 md:right-10 ml-10'>
                 <div
                     tabIndex={0}
                     className={`cursor-pointer collapse collapse-arrow bg-base-200 rounded-box ${isOpen ? "collapse-open" : "collapse-close"} w-80 md:w-96 shadow-lg`}
                     onClick={() => setIsOpen(prev => !prev)}
                     >
                     <h2 className='text-xl font-semibold collapse-title'>你的的訂單明細:</h2>
-                    <div className='collapse-content text-sm  px-10'>
+                    <div className='collapse-content text-sm px-10'>
                         {Object.keys(selectedIngredients)
                             .sort((a, b) => Number(a.replace("step", "")) - Number(b.replace("step", "")))
                             .map((step) => (
@@ -135,7 +135,6 @@ const MakeModel = () => {
                     </div>
                     
                 </div>
-                
             </div>
             <Suspense fallback={<div className='h-screen w-full flex justify-center items-center font-bold text-3xl'>Loading...</div>}>
                 <Spline scene="https://prod.spline.design/nzyOcxgRIO9CS7dl/scene.splinecode?v=3"

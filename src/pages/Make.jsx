@@ -11,6 +11,7 @@ import { setStepIngredients, toggleIngredient } from '../redux/orderSlice'
 import { doc, updateDoc, arrayUnion } from 'firebase/firestore'
 import { addOrderToUser } from '../redux/userSlice'
 import { toast } from 'react-hot-toast';
+import { motion } from 'motion/react'
 
 const Make = () => {
   const navigate = useNavigate();
@@ -45,7 +46,7 @@ const Make = () => {
             要將 <b>{replaced.name || replaced.splineName}</b> 換成 <b>{ingredient.name || ingredient.splineName}</b> 嗎？
             <div className="mt-2 flex flex-row justify-around mt-8">
               <button
-                className="btn btn-sm btn-primary"
+                className="btn btn-sm btn-primary hover:brightness-80"
                 onClick={() => {
                   const updated = [...currentSelected.slice(1), ingredient];
                   dispatch(setStepIngredients({ step: stepKey, ingredients: updated }));
@@ -57,7 +58,7 @@ const Make = () => {
                 確認
               </button>
               <button
-                className="btn btn-sm btn-outline"
+                className="btn btn-sm btn-outline border-primary text-primary hover:brightness-80"
                 onClick={() => {
                   toast.dismiss(t.id);
                   toastIdRef.current = null;
@@ -172,8 +173,20 @@ const Make = () => {
     }
   }
 
+  const fadeInEffect = {
+    hidden: { opacity: 0 },
+    show: { opacity: 1 },
+  };
+
   return (
-    <div ref={topRef} className='pt-25 flex flex-col min-h-screen p-8 transition-colors duration-500 ease-in-out'>
+    <motion.div 
+    variants={fadeInEffect}
+      initial="hidden"
+      animate="show"
+      transition={{ duration: 0.7, delay: 0.2 }}
+    ref={topRef} 
+    className='pt-25 flex flex-col min-h-screen p-8 transition-colors duration-500 ease-in-out'
+    >
       <Step step={step} />
       <div className="flex flex-col md:flex-row transition-all duration-500">
 
@@ -201,7 +214,7 @@ const Make = () => {
           {step === 5 ? "確認訂單" : "下一步"}
         </button>
       </div>
-    </div>
+    </motion.div>
   )
 }
 

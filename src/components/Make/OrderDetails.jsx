@@ -27,7 +27,7 @@ const OrderDetails = ({ isOpen, setIsOpen}) => {
       <div
         className={`
           fixed bottom-5 right-5 w-62 bg-base-100 border-base-300 border-2 text-base-content shadow-3xl rounded-lg p-4 flex flex-col justify-between
-          transition-transform duration-500 transform 
+          transition-transform duration-500 transform
           ${isOpen ? "translate-x-0 pl-10" : "translate-x-[110%] pl-5"}
           md:translate-x-0 md:fixed md:right-5 md:bottom-20 md:w-1/4
         `}
@@ -36,13 +36,13 @@ const OrderDetails = ({ isOpen, setIsOpen}) => {
         
         <h3 className="text-base mt-2 font-bold">目前已選</h3>
         {/* 動態顯示已選食材 */}
-        <ul className="menu text-sm">
+        <ul className="menu text-sm leading-5 md:leading-6">
           {Object.keys(selectedIngredients)
           .sort((a, b) => Number(a.replace("step", "")) - Number(b.replace("step", "")))
           .map((step) => (
               selectedIngredients[step].length > 0 && (
                   <li key={step}>
-                    <div  className='list-none pb-2 flex flex-row'>
+                    <div  className='list-none flex flex-row'>
                         <p className='font-semibold'> { orderHints[step.slice(-1) - 1].slice(4)}</p>
                         <span className='text-xs text-primary'>(可選 {ingredientChooseCount[step.slice(-1) - 1]} / <span className='font-bold'>已選 {selectedIngredients[step].length}</span>)</span>
                     </div>

@@ -62,7 +62,7 @@ const Hero = () => {
                 了解更多
               </a>
             ) : (
-              <Link to="/login">
+              <Link to="/make">
                 開始製作
               </Link>
             )
