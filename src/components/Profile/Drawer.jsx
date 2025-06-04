@@ -4,6 +4,7 @@ import OrderRecord from './OrderRecord'
 import { useNavigate } from 'react-router'
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../../redux/userSlice';
+import { logout as logoutAction } from '../../firebase/authService';
 
 const Drawer = () => {
   const [currentSelected, setCurrentSelected] = useState(1); // 記錄當前選擇的 drawer 按鈕＆頁面
@@ -69,7 +70,8 @@ const Drawer = () => {
             onClick={() => {
               dispatch(logout())
               // window.location.reload() 
-              // navigate('/')
+              logoutAction()
+              navigate('/')
             }}
             className="text-sm mb-4 w-full btn btn-outline border-accent text-accent font-semibold py-2 rounded-lg hover:brightness-80"
           >登出</button>

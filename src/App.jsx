@@ -22,6 +22,7 @@ import Login from './pages/Login'
 import DarkmodeBtn from './components/DarkmodeBtn'
 import CatlogDetail from './pages/CatlogDetail'
 import MakeModel from './pages/MakeModel'
+import LoadingScreen from './pages/LoadingScreen';  
 
 function App() {
   // login and logout
@@ -31,20 +32,24 @@ function App() {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
-        const userDocRef = doc(db, "users", user.uid);
-        const userSnap = await getDoc(userDocRef);
-
-        if (userSnap.exists()) {
-          const userData = userSnap.data();
-          dispatch(setUser(userData));
-        } else {
-          console.error("找不到使用者資料");
-          dispatch(setUser({ uid: user.uid, email: user.email })); // 至少保留基本資料
+        try {
+          const userDocRef = doc(db, "users", user.uid);
+          const userSnap = await getDoc(userDocRef);
+          const userData = userSnap.exists() ? userSnap.data() : {};
+          
+          dispatch(setUser({
+            uid: user.uid,
+            email: user.email,
+            name: userData.name || '',
+          }));
+        } catch (err) {
+          console.error("讀取使用者資料失敗：", err);
         }
       } else {
         dispatch(logoutAction());
       }
-      console.log('onAuthStateChanged user:', user);
+
+      setAuthInitializing(false);
     });
 
     return () => unsubscribe();
@@ -63,6 +68,15 @@ function App() {
   const toggleTheme = () => {
     setTheme((prevTheme) => (prevTheme === 'caramellatte' ? 'coffee' : 'caramellatte'));
   };
+
+  // Auth state initialization
+  const [authInitializing, setAuthInitializing] = useState(true);
+
+  
+
+  if (authInitializing) {
+    return <LoadingScreen />;
+  }
 
   return (
     <AnimatePresence mode="wait">
