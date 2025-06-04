@@ -16,7 +16,7 @@ const ConfirmOrder = () => {
                 <h2 className="text-lg font-semibold mb-2">{orderHints[step.slice(-1) - 1].slice(4)}</h2>
                 <ul>
                   {selectedIngredients[step].map((item) => (
-                    <li  className='leading-5 md:leading-6' key={item.id}>{item.name}</li>
+                    <li className='leading-5 md:leading-6' key={item.id}>{item.name}</li>
                   ))}
                 </ul>
               </div>

@@ -52,7 +52,7 @@ export const ingredients = {
     { typeid: 3, stateid: 10,id: 19, splineName: "okra", name: "秋葵", type: "vegetable", calories: 33, protein: 2.0, carbs: 7.4, fat: 0.1, description: "富含膳食纖維，有助於腸胃健康。", image: "/assets/ingredientsImage/okra.png" },
     { typeid: 3, stateid: 11,id: 20, splineName: "tofuSide", name: "豆腐", type: "vegetable", calories: 35, protein: 3.0, carbs: 4.4, fat: 0.1, description: "富含蛋白質，口感嫩滑。", image: "/assets/ingredientsImage/tofu.png" },
     { typeid: 3, stateid: 12,id: 21, splineName: "drytofu", name: "豆干", type: "vegetable", calories: 48, protein: 3.0, carbs: 5.2, fat: 0.4, description: "鹹甜醬汁熬煮，開胃好食。", image: "/assets/ingredientsImage/driedTofu.png" },
-    { typeid: 3, stateid: 13,id: 22, splineName: "pumkin", name: "南瓜", type: "vegetable", calories: 40, protein: 1.2, carbs: 7.3, fat: 0.1, description: "富含膳食纖維，低熱量又有飽足感", image: "/assets/ingredientsImage/pumpkin.png" },
+    { typeid: 3, stateid: 13,id: 22, splineName: "pumkin", name: "南瓜", type: "vegetable", calories: 40, protein: 1.2, carbs: 7.3, fat: 0.1, description: "富含膳食纖維，低熱量又有飽足感。", image: "/assets/ingredientsImage/pumpkin.png" },
   ],
   step4: [
     { typeid: 4, stateid: 1, id: 23, splineName: "Egg", name: "水煮蛋", type: "other", calories: 68, protein: 5.5, carbs: 0.6, fat: 4.8, description: "完整蛋白質來源，富含膽鹼與B群。", image: "/assets/ingredientsImage/eggs.png" },

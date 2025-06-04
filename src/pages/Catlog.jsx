@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import IngredientList from '../components/Catlog/IngredientList'
 import { ingredients } from '../constants'
 import { useSearchParams, useNavigate } from "react-router";
+import { motion } from 'motion/react';
 
 const Catlog = () => {
   const navigate = useNavigate();
@@ -9,9 +10,19 @@ const Catlog = () => {
   const tab = parseInt(queryParams.get("tab") || "1");
   const search = queryParams.get("search") || "";
   const [searchInput, setSearchInput] = useState(search); // 記錄使用者在搜尋欄裡的輸入
+  const fadeInEffect = {
+    hidden: { opacity: 0 },
+    show: { opacity: 1 },
+  };
 
   return (
-    <div className="h-min-screen mx-16 mb-32 transition-colors duration-500 ease-in-out">
+    <motion.div 
+    variants={fadeInEffect}
+      initial="hidden"
+      animate="show"
+      transition={{ duration: 0.7 }}
+    className="h-min-screen mx-16 mb-32 transition-colors duration-500 ease-in-out"
+    >
       { /* 搜尋欄 */}
       <div className="mt-32 mb-8">
         <label className="input w-full">
@@ -47,7 +58,7 @@ const Catlog = () => {
         : <></>
       }
 
-    </div>
+    </motion.div>
   )
 }
 

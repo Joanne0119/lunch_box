@@ -25,7 +25,7 @@ const IngredientItem = ({ ingredient, step, index, searchInput }) => {
     return (
         <div> { /*食材卡片本體*/}
             <Link to={`/catlog/${ingredient.type}-${index}?tab=${step}&search=${searchInput}`}>
-                <div className="card bg-base-300 md:h-90 sm:h-96 border-1 border-neutual border-opacity-30">
+                <div className="card bg-base-300 md:h-90 sm:h-96 border-1 border-neutual border-opacity-30 hover:scale-102 hover:shadow-sm">
                     <figure className='px-4 pt-4'>
                         <img
                             src={ingredient.image}

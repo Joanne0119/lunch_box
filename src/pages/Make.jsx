@@ -179,13 +179,13 @@ const Make = () => {
   };
 
   return (
-    <motion.div 
-    variants={fadeInEffect}
+    <motion.div
+      variants={fadeInEffect}
       initial="hidden"
       animate="show"
-      transition={{ duration: 0.7, delay: 0.2 }}
-    ref={topRef} 
-    className='pt-25 flex flex-col min-h-screen p-8 transition-colors duration-500 ease-in-out'
+      transition={{ duration: 0.7 }}
+      ref={topRef}
+      className='pt-25 flex flex-col min-h-screen p-8 transition-colors duration-500 ease-in-out'
     >
       <Step step={step} />
       <div className="flex flex-col md:flex-row transition-all duration-500">

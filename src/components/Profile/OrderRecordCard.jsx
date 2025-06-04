@@ -16,15 +16,15 @@ const OrderRecordCard = ({ order }) => {
             {/* 訂單描述 */}
             <div className="mx-5 leading-7">
                 <h2 className="font-bold text-lg mb-1">{order.name}</h2>
-                <p>下單時間：{new Date(order.createdAt).toLocaleString()}</p>
-                <p>便當菜色：</p>
+                <p className="text-primary opacity-80">下單時間：{new Date(order.createdAt).toLocaleString()}</p>
+                <p className="text-primary opacity-80">便當菜色：</p>
                 <div className="flex flex-wrap gap-2 mt-2">
                 {[order.ingredients.step2?.[0], order.ingredients.step1?.[0], 
                     ...(order.ingredients.step3 || []), 
                     ...(order.ingredients.step4 || [])]
                     .filter(Boolean) // 避免 undefined
                     .map((item, idx) => (
-                    <span key={idx} className="badge badge-outline">
+                    <span key={idx} className="badge badge-outline badge-primary opacity-80">
                         {item.name}
                     </span>
                 ))}
