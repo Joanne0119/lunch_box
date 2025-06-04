@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { b, s } from 'motion/react-client'
 
 const initialState = {
   selectedIngredients: {
@@ -6,7 +7,12 @@ const initialState = {
     step2: [],
     step3: [],
     step4: []
-  }
+  },
+  bentoName: '',
+  currentStep: 1,
+  isConfirmed: false,
+  totalKcal: 0,
+  totalPrice: 0
 }
 
 const orderSlice = createSlice({
@@ -24,6 +30,11 @@ const orderSlice = createSlice({
         step3: [],
         step4: []
       }
+      state.bentoName = '',
+      state.currentStep = 1,
+      state.isConfirmed = false,
+      state.totalKcal = 0,
+      state.totalPrice = 0
     }
     ,
     toggleIngredient: (state, action) => {
@@ -43,9 +54,33 @@ const orderSlice = createSlice({
     updateStepIngredients: (state, action) => {
       const { step, data } = action.payload
       state.selectedIngredients[step] = data
+    },
+    setCurrentStep: (state, action) => {
+      state.currentStep = action.payload
+    },
+    setIsComfirmed: (state, action) => {
+      state.isConfirmed = action.payload
+    },
+    setBentoName: (state, action) => {
+      state.bentoName = action.payload
+    },
+    setTotalKcal: (state, action) => {
+      state.totalKcal = action.payload
+    },
+    setTotalPrice: (state, action) => {
+      state.totalPrice = action.payload
     }
   }
 })
 
-export const { setStepIngredients, resetOrder, toggleIngredient, updateStepIngredients } = orderSlice.actions
+export const { setStepIngredients, 
+                resetOrder, 
+                toggleIngredient, 
+                updateStepIngredients,
+                setCurrentStep, 
+                setIsComfirmed, 
+                setBentoName,
+                setTotalKcal,
+                setTotalPrice
+               } = orderSlice.actions
 export default orderSlice.reducer

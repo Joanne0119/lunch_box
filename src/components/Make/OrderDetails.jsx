@@ -1,16 +1,25 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { orderHints, ingredientChooseCount } from '../../constants'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { setTotalKcal } from '../../redux/orderSlice'
 
 const OrderDetails = ({ isOpen, setIsOpen}) => {
   const selectedIngredients = useSelector(state => state.order.selectedIngredients)
-  const totalCalories = Object.values(selectedIngredients).reduce((total, step) => {
-    return total + step.reduce((stepTotal, ingredient) => {
-      return stepTotal + (ingredient.calories || 0);
-    }
-    , 0);
-  }
-  , 0);
+  const dispatch = useDispatch();
+  
+  useEffect(() => {
+    const totalKcal = Object.values(selectedIngredients).reduce((total, step) => {
+      return total + step.reduce((stepTotal, ingredient) => {
+        return stepTotal + (ingredient.calories || 0);
+      }, 0);
+    }, 0);
+
+    dispatch(setTotalKcal(totalKcal));
+  }, [selectedIngredients, dispatch]); 
+
+  const totalKcal = useSelector(state => state.order.totalKcal);
+
+
   return (
     <>
       {/* 手機版的展開按鈕 */}
@@ -32,7 +41,7 @@ const OrderDetails = ({ isOpen, setIsOpen}) => {
           md:translate-x-0 md:fixed md:right-5 md:bottom-20 md:w-1/4
         `}
       > 
-        <h3 className="text-base mt-2 font-bold">總熱量： <span className="text-2xl font-bold">{totalCalories} kcal</span></h3>
+        <h3 className="text-base mt-2 font-bold">總熱量： <span className="text-2xl font-bold">{totalKcal} kcal</span></h3>
         
         <h3 className="text-base mt-2 font-bold">目前已選</h3>
         {/* 動態顯示已選食材 */}

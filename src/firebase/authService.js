@@ -19,7 +19,7 @@ export const register = async (email, password, username) => {
       uid: user.uid,
       name: displayName,
       email: user.email,
-      orderlist: []  
+      orderlist: []
     });
     console.log('Firestore 使用者資料建立完成');
 

@@ -7,7 +7,7 @@ import { ingredients, orderHints, ingredientToName } from '../constants'
 import { useNavigate } from 'react-router'
 import { useSelector, useDispatch } from 'react-redux'
 import { db } from '../firebase/firebase'
-import { setStepIngredients, toggleIngredient } from '../redux/orderSlice'
+import { setStepIngredients, toggleIngredient, setCurrentStep, setIsComfirmed, setBentoName } from '../redux/orderSlice'
 import { doc, updateDoc, arrayUnion } from 'firebase/firestore'
 import { addOrderToUser } from '../redux/userSlice'
 import { toast } from 'react-hot-toast';
@@ -17,8 +17,11 @@ const Make = () => {
   const navigate = useNavigate();
   const topRef = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
-
-  const [step, setStep] = useState(1); // 目前的步驟
+  const step = useSelector(state => state.order.currentStep) || 1; // 目前的步驟
+  const isConfirmed = useSelector(state => state.order.isConfirmed) || false; // 是否已確認訂單
+  const bentoName = useSelector(state => state.order.bentoName) || "就是好吃的便當"; // 便當名稱
+  const totalKcal = useSelector(state => state.order.totalKcal) || 0; // 總熱量
+  const totalPrice = useSelector(state => state.order.totalPrice) || 0; // 總價格
   const dispatch = useDispatch()
   const selectedIngredients = useSelector(state => state.order.selectedIngredients)
   const user = useSelector(state => state.user.user) || null;
@@ -81,12 +84,13 @@ const Make = () => {
     }))
   };
 
-  const [bentoName, setBentoName] = useState('');
+  // const [bentoName, setBentoName] = useState('');
 
   useEffect(() => {
     if (selectedIngredients) {
       const name = getBentoName(selectedIngredients);
       setBentoName(name);
+      dispatch(setBentoName(name));
     }
   }, [selectedIngredients]);
 
@@ -104,26 +108,31 @@ const Make = () => {
 
   const handleNextStep = () => {
     if (step < 4) {
-      setStep((prev) => prev + 1);
+      dispatch(setCurrentStep(step + 1));
     } else {
-      setStep((prev) => prev + 1);
+      dispatch(setCurrentStep(step + 1));
       setIsOrderConfirmed(true);
     }
   };
 
   const handlePrevStep = () => {
     if (step > 1) {
-      setStep((prev) => prev - 1);
+      dispatch(setCurrentStep(step - 1));
       setIsOrderConfirmed(false);
     }
   };
 
   const goto3DModelPage = () => {
+    dispatch(setIsComfirmed(true));
     navigate('/makeresult', { state: { selectedIngredients, bentoName } });
   }
 
   const handleClick = async () => {
     if (step === 5) {
+      if (isConfirmed) {
+        goto3DModelPage();
+        return;
+      } 
       if (user && user.uid) {
         await saveOrderToFirebase()
       }
@@ -157,7 +166,9 @@ const Make = () => {
     const newOrder = {
       ingredients: selectedIngredients,
       createdAt: today,
-      name: bentoName
+      name: bentoName,
+      totalKcal: totalKcal, 
+      totalPrice: totalPrice, 
     }
 
     try {

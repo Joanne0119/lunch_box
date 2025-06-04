@@ -17,6 +17,7 @@ const OrderRecordCard = ({ order }) => {
             <div className="mx-5 leading-7">
                 <h2 className="font-bold text-lg mb-1">{order.name}</h2>
                 <p className="text-primary opacity-80">下單時間：{new Date(order.createdAt).toLocaleString()}</p>
+                <p className="text-primary opacity-80">總熱量：{order.totalKcal} kcal</p>
                 <p className="text-primary opacity-80">便當菜色：</p>
                 <div className="flex flex-wrap gap-2 mt-2">
                 {[order.ingredients.step2?.[0], order.ingredients.step1?.[0], 

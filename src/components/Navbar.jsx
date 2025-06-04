@@ -2,15 +2,17 @@ import { useState, useEffect, useRef } from 'react';
 import { navLinks } from '../constants';
 import { Link } from 'react-router';
 import { useSelector, useDispatch } from 'react-redux';
+import { setIsComfirmed } from '../redux/orderSlice';
 const NavItems = () => {
-  
+    const isConfirmed = useSelector(state => state.order.isConfirmed) || false; // 是否已確認訂單
+    const dispatch = useDispatch()
     return (
       <ul className='flex flex-col items-center gap-4 sm:flex-row md:gap-6 relative z-20'>
         {
           navLinks.map((item) => (
             <li key={item.id} className='text-neutral-400 font-generalsans max-sm:hover:bg-base-300 max-sm:w-full max-sm:rounded-md py-2 max-sm:px-5'>
               <Link 
-                to={item.href}
+                to={isConfirmed && item.id === 2 ? '/makeresult' : item.href}
                 className='text-base md:text-lg transition-all text-base-content hover:text-primary focus:text-primary'
               >
                 {item.name}

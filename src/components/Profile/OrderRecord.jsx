@@ -33,7 +33,7 @@ const OrderRecord = () => {
         return <div className="p-6 text-red-500 p-6 transition-colors duration-500 ease-in-out">載入失敗，請稍後再試</div>;
     }
 
-    if (!user.orderlist || user.orderlist.length === 0) {
+    if (!orders || orders.length === 0) {
         return (
             <div className="flex flex-col items-center justify-center h-[calc(100vh-9rem)] transition-colors duration-500 ease-in-out">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className='w-24 h-24 mb-4 fill-current'>
@@ -61,7 +61,7 @@ const OrderRecord = () => {
                 />
             ))}
             {/* <p className="opacity-70 my-8">已滑至最新的便當紀錄</p> */}
-            <p className="opacity-60 my-8">沒有更早的訂單了</p>
+            <p className="opacity-60 my-8 ml-2">沒有更早的訂單了...</p>
         </div>
        
     )
