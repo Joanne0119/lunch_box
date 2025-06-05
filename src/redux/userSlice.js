@@ -1,11 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { p } from 'motion/react-client';
 
 const userSlice = createSlice({
   name: 'user',
   initialState: {
     user: null,
     isLogin: false,
-    orderlist: []
+    orderlist: [],
+    profileImage: '/assets/guest.png', // 預設頭像
   },
   reducers: {
     setUser(state, action) {
@@ -31,9 +33,13 @@ const userSlice = createSlice({
       state.user = null;
       state.isLogin = false;
       state.orderlist = []
+      state.profileImage = '/assets/guest.png'; // 重置頭像
     },
+    setAvatar(state, action) {
+      state.profileImage = action.payload; // 更新頭像
+    }
   }
 })
 
-export const { setUser, logout, addOrderToUser, updateUser } = userSlice.actions
+export const { setUser, logout, addOrderToUser, updateUser, setAvatar } = userSlice.actions
 export default userSlice.reducer

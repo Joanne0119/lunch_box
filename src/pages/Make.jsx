@@ -157,12 +157,6 @@ const Make = () => {
     topRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [step]);
 
-  const isDisabled = (step) => {
-    const data = selectedIngredients[`step${step}`]
-    // if (step === 1 || step === 2) return !data.length
-    return false
-  };
-
   const today = new Date().toISOString();
 
   const saveOrderToFirebase = async () => {
@@ -228,7 +222,7 @@ const Make = () => {
       </div>
       <div className='mb-10 flex justify-around max-w-3/4 w-full mx-auto mt-6 px-4 items-start md:ml-2'>
         <button className='btn btn-outline border-primary text-primary hover:brightness-80 disabled:btn' onClick={handlePrevStep} disabled={step === 1}>上一步</button>
-        <button className={step === 5 ? 'btn btn-success hover:brightness-80' : 'btn btn-primary hover:brightness-80'} onClick={handleClick} disabled={isDisabled(step)}>
+        <button className={step === 5 ? 'btn btn-success hover:brightness-80' : 'btn btn-primary hover:brightness-80'} onClick={handleClick}>
           {step === 5 ? "確認訂單" : "下一步"}
         </button>
       </div>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import IngredientList from '../components/Catlog/IngredientList'
 import { ingredients } from '../constants'
 import { useSearchParams, useNavigate } from "react-router";
@@ -6,8 +6,9 @@ import { motion } from 'motion/react';
 
 const Catlog = () => {
   const navigate = useNavigate();
-  const [queryParams] = useSearchParams();
-  const tab = parseInt(queryParams.get("tab") || "1");
+  const [queryParams, setQueryParams] = useSearchParams();
+  const tab = parseInt(queryParams.get("tab") || "0");
+  console.log("tab", tab);
   const search = queryParams.get("search") || "";
   const [searchInput, setSearchInput] = useState(search); // 記錄使用者在搜尋欄裡的輸入
   const fadeInEffect = {
@@ -15,13 +16,20 @@ const Catlog = () => {
     show: { opacity: 1 },
   };
 
+    useEffect(() => {
+    if (!queryParams.get("tab")) {
+      setQueryParams({ tab: "0" }, { replace: true });
+    }
+  }, [queryParams, setQueryParams]);
+
+
   return (
     <motion.div 
     variants={fadeInEffect}
       initial="hidden"
       animate="show"
       transition={{ duration: 0.7 }}
-    className="h-min-screen mx-16 mb-32 transition-colors duration-500 ease-in-out"
+    className="h-min-screen mx-12 mb-32 transition-colors duration-500 ease-in-out"
     >
       { /* 搜尋欄 */}
       <div className="mt-32 mb-8">
@@ -38,6 +46,10 @@ const Catlog = () => {
       { /* 食材分類與卡片 */}
       {searchInput == "" ?
         <div role="tablist" className="tabs tabs-border">
+          <input type="radio" name="my_tabs" className="tab" aria-label="所有食材" defaultChecked={tab == 0} onChange={() => navigate("/catlog?tab=0")} />
+          <div role="tabpanel" className="tab-content">
+            <IngredientList ingredients={ingredients} step={0} searchInput={searchInput} />
+          </div>
           <input type="radio" name="my_tabs" className="tab" aria-label="澱粉基底" defaultChecked={tab == 1} onChange={() => navigate("/catlog?tab=1")} />
           <div role="tabpanel" className="tab-content">
             <IngredientList ingredients={ingredients} step={1} searchInput={searchInput} />

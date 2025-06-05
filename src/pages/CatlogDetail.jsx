@@ -8,14 +8,33 @@ const CatlogDetail = () => {
 
   const { ingredientType } = useParams(); // 食材類別-編號
   const split = ingredientType.split('-');
-  const typeZH = typeMap[split[0]]; // 食材類別中文名稱
-  const number = split[1]; // 取得食材編號
-
+  const number = parseInt(split[1]); // 取得食材編號 (which is stateid)
+  const type = split[0];
   const [queryParams] = useSearchParams();
   const currentTab = queryParams.get('tab'); // 由網址 query 取得當前的 tab（step）編號
+  console.log("currentTab", currentTab);
   const currentSearch = queryParams.get('search'); // 由網址 query 取得當前的 search 內容
 
-  const ingredient = ingredients[`step${currentTab}`]?.[number - 1]; // 取得食材資料
+  let ingredient;// 取得食材資料
+  if (currentTab === '0' || currentTab === '-1') {
+    // 合併所有 step 陣列
+    const allIngredients = Object.values(ingredients).flat();
+    console.log("allIngredients", allIngredients);
+    console.log("type", type, "number", number);
+    ingredient = allIngredients.find(item => item.type === type && item.stateid === number);
+    console.log("ingredient", ingredient);
+  } else {
+    // For specific category tabs (step 1-4), number is effectively the index + 1
+    ingredient = ingredients[`step${currentTab}`]?.[number - 1];
+  }
+
+  const typeZH = typeMap[type];
+
+  if (!ingredient) {
+    return <div className="text-center h-screen flex justify-center items-center transition-colors duration-500 ease-in-out ">
+        <h1 className="text-2xl font-bold">找不到該食材資料</h1>
+      </div>;
+  }
 
   return (
     <div className="h-min-screen mx-16 mb-32 transition-colors duration-500 ease-in-out">
