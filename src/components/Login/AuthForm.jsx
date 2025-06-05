@@ -6,6 +6,7 @@ import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../firebase/firebase";
 import { setUser } from '../../redux/userSlice';
 import { motion } from 'motion/react';
+import { toast } from 'react-hot-toast';
 
 const AuthForm = ({ theme }) => {
   const [isSignUp, setIsSignUp] = useState(false);
@@ -38,15 +39,16 @@ const AuthForm = ({ theme }) => {
         navigate('/');
       } else {
         console.error("找不到使用者資料");
-        alert("找不到使用者資料，請聯絡管理員");
+        toast.error("找不到使用者資料，請稍後再試");
       }
     } catch (error) {
       console.error(error);
+      console.log("🔥 error.code:", error.code);
       let errorMessage = "登入失敗，請稍後再試";
-      if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
+      if (error.code === 'auth/invalid-credential' || error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
         errorMessage = "帳號或密碼錯誤";
       }
-      alert(errorMessage);
+      toast.error(errorMessage);
     }
   };
 
@@ -56,7 +58,7 @@ const AuthForm = ({ theme }) => {
       const userCredential = await register(email, password, username);
       const user = userCredential.user;
       // dispatch(setUser({ uid: user.uid, email: user.email, displayName: username }));
-      alert("註冊成功");
+      toast.success("註冊成功，請登入");
 
       window.location.reload();
       navigate('/login');
@@ -68,7 +70,7 @@ const AuthForm = ({ theme }) => {
       } else if (error.code === 'auth/invalid-email') {
         errorMessage = "信箱格式不正確";
       }
-      alert(errorMessage);
+      toast.error(errorMessage);
     }
   };
 
