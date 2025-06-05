@@ -18,7 +18,9 @@ const IngredientList = ({ ingredients, step, searchInput }) => {
     return (
         <div className="grid lg:grid-cols-6 md:grid-cols-4 sm:grid-cols-2 gap-5 mt-8">
             {
-                list.map(
+                list
+                    .filter(ingredient => ingredient.id < 25) 
+                    .map(
                     (ingredient) =>
                         <IngredientItem
                             ingredient={ingredient}

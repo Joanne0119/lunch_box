@@ -46,7 +46,11 @@ const OrderDetails = ({ isOpen, setIsOpen}) => {
         <h3 className="text-base mt-2 font-bold">目前已選</h3>
         {/* 動態顯示已選食材 */}
         <ul className="menu text-sm leading-5 md:leading-6">
-          {Object.keys(selectedIngredients)
+          {
+             Object.values(selectedIngredients).every(arr => arr.length === 0) ? (
+              <p className="text-primary/60">您沒尚未選擇任何食材</p>
+          ) : (
+          Object.keys(selectedIngredients)
           .sort((a, b) => Number(a.replace("step", "")) - Number(b.replace("step", "")))
           .map((step) => (
               selectedIngredients[step].length > 0 && (
@@ -63,7 +67,8 @@ const OrderDetails = ({ isOpen, setIsOpen}) => {
                   </ul>
                   </li>
               )
-            ))}
+            ))
+          )}
           
         </ul>
       </div>

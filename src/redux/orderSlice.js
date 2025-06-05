@@ -42,9 +42,7 @@ const orderSlice = createSlice({
       const list = state.selectedIngredients[step] || []
       const exists = list.find((item) => item.id === ingredient.id)
 
-      if (step === 'step1' || step === 'step2') {
-        state.selectedIngredients[step] = [ingredient]
-      } else if (exists) {
+      if (exists) {
         state.selectedIngredients[step] = list.filter((item) => item.id !== ingredient.id)
       } else {
         if (step === 'step3' && list.length >= 4) return // 限制最多 4 項

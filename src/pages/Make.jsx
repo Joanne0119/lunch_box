@@ -95,7 +95,15 @@ const Make = () => {
   }, [selectedIngredients]);
 
   function getBentoName(selectedIngredients) {
+    const step1 = selectedIngredients.step1 || [];
+    const step3 = selectedIngredients.step3 || [];
+    const step4 = selectedIngredients.step4 || [];
     const step2 = selectedIngredients.step2 || [];
+    if (step1.length === 0 && step2.length === 0 && step3.length === 0 && step4.length === 0) {
+      const names = ingredientToName['empty'];
+      const randomIndex = Math.floor(Math.random() * names.length);
+      return names[randomIndex];
+    }
     for (const item of step2) {
       const names = ingredientToName[item.splineName];
       if (names) {
@@ -151,8 +159,7 @@ const Make = () => {
 
   const isDisabled = (step) => {
     const data = selectedIngredients[`step${step}`]
-    if (step === 1 || step === 2) return !data.length
-    if (step === 3) return data.length < 4
+    // if (step === 1 || step === 2) return !data.length
     return false
   };
 

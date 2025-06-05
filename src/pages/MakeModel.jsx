@@ -88,7 +88,11 @@ const MakeModel = () => {
                     <h2 className='text-xl font-semibold collapse-title'>你的的訂單明細:</h2>
                     <div className='collapse-content text-sm  px-10'>
                         <h3 className='text-lg font-semibold pb-2'>總熱量: {totalKcal} kcal</h3>
-                        {Object.keys(selectedIngredients)
+                        {
+                        Object.values(selectedIngredients).every(arr => arr.length === 0) ? (
+                            <p className="text-primary/60">您的便當空空如也</p>
+                        ) : (
+                        Object.keys(selectedIngredients)
                             .sort((a, b) => Number(a.replace("step", "")) - Number(b.replace("step", "")))
                             .map((step) => (
                                 selectedIngredients[step].length > 0 && (
@@ -101,7 +105,8 @@ const MakeModel = () => {
                                     </ul>
                                     </li>
                                 )
-                            ))}
+                            ))
+                        )}
                     </div>
                     
                 </div>

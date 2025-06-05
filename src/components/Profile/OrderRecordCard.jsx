@@ -20,7 +20,11 @@ const OrderRecordCard = ({ order }) => {
                 <p className="text-primary opacity-80">總熱量：{order.totalKcal} kcal</p>
                 <p className="text-primary opacity-80">便當菜色：</p>
                 <div className="flex flex-wrap gap-2 mt-2">
-                {[order.ingredients.step2?.[0], order.ingredients.step1?.[0], 
+                {
+                order.totalKcal <= 0 ? (
+                    <span className="badge badge-outline badge-primary opacity-80">無</span>
+                ) : (
+                [order.ingredients.step2?.[0], order.ingredients.step1?.[0], 
                     ...(order.ingredients.step3 || []), 
                     ...(order.ingredients.step4 || [])]
                     .filter(Boolean) // 避免 undefined
@@ -28,7 +32,7 @@ const OrderRecordCard = ({ order }) => {
                     <span key={idx} className="badge badge-outline badge-primary opacity-80">
                         {item.name}
                     </span>
-                ))}
+                )))}
                 </div>
             </div>
         </div>
