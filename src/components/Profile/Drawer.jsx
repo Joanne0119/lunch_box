@@ -29,7 +29,7 @@ const Drawer = () => {
         {/* 螢幕寬度過小時收起 drawer */}
         <label 
           htmlFor="my-drawer" 
-          className="drawer-button border-none cursor-pointer bg-base-100 p-4 rounded-lg lg:hidden fixed top-20 left-2 mt-4 ml-4"
+          className="drawer-button border-none cursor-pointer bg-base-100 p-4 rounded-lg lg:hidden fixed top-20 left-2 mt-4 ml-2 z-15"
         >
           <img className="w-8 h-8 object-cover" src={avatar} alt="帳號頭像" />
         </label>
