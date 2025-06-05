@@ -49,7 +49,7 @@ const IngredientItem = ({ ingredient, step, index, searchInput }) => {
         <div> { /*食材卡片本體*/}
             <Link to={`/catlog/${ingredient.type}-${index}?tab=${step}&search=${searchInput}`}>
                 <div className="card bg-base-300 lg:h-70 md:h-80 border-1 border-neutual border-opacity-30 hover:scale-102 hover:shadow-sm">
-                    <figure className='px-4 pt-4'>
+                    <figure className='px-4 py-4'>
                         <img
                             src={ingredient.image}
                             alt={ingredient.name}
@@ -57,7 +57,7 @@ const IngredientItem = ({ ingredient, step, index, searchInput }) => {
                     </figure>
                     <div className="card-body">
                         <h2 className="card-title">{ingredient.name}</h2>
-                        <p className="text-primary line-clamp-2" 
+                        <p className="text-primary line-clamp-2 opacity-80" 
                             style= {
                                 {
                                     display: '-webkit-box',

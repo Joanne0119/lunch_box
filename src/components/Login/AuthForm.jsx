@@ -79,6 +79,8 @@ const AuthForm = ({ theme }) => {
     show: { opacity: 1 },
   };
 
+  const [isLoading, setIsLoading] = useState(false); // 按下登入或註冊鈕的 Loading 效果
+
   return (
     <motion.div
       variants={fadeInEffect}
@@ -90,6 +92,7 @@ const AuthForm = ({ theme }) => {
       <div className="w-full max-w-md bg-base-200 rounded-2xl shadow-lg p-8">
         <form
           onSubmit={(e) => {
+            setIsLoading(true);
             e.preventDefault();
             isSignUp ? handleRegister() : handleLogin();
           }}
@@ -191,9 +194,14 @@ const AuthForm = ({ theme }) => {
           <button
             type="submit"
             className="w-full py-2 btn btn-primary text-white hover:brightness-80 rounded-full font-semibold"
+            disabled={isLoading}
           // onClick={() => isSignUp ? handleRegister() : handleLogin()} 
           >
-            {isSignUp ? '註冊' : '登入'}
+            {isLoading ? (
+              <span className="loading loading-spinner loading-xs"></span>
+            ) : (
+              isSignUp ? '註冊' : '登入'
+            )}
           </button>
 
           <div className="mt-6 text-center text-sm">

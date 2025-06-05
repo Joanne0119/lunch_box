@@ -31,7 +31,7 @@ const Drawer = () => {
           htmlFor="my-drawer" 
           className="drawer-button border-none cursor-pointer bg-base-100 p-4 rounded-lg lg:hidden fixed top-20 left-2 mt-4 ml-4"
         >
-          <img className="w-8 h-8" src={avatar} alt="帳號頭像" />
+          <img className="w-8 h-8 object-cover" src={avatar} alt="帳號頭像" />
         </label>
         {currentSelected === 1 ? <Account /> : <OrderRecord />}
       </div>
@@ -42,7 +42,7 @@ const Drawer = () => {
           {/* Sidebar content here */}
           <div className='flex flex-col justify-between mb-10'>
             <div className="flex flex-col items-center justify-center">
-            <img className="w-16 h-16 border border-primary/20 border-1 p-1 rounded-full" src={avatar}alt="帳號頭像" />
+            <img className="w-16 h-16 border border-primary/20 border-1 p-1 rounded-full object-cover" src={avatar}alt="帳號頭像" />
             <p className="mt-2 mb-1">{user.name}</p>
             <p className="text-sm opacity-50 mb-10">{user.email}</p>
           </div>

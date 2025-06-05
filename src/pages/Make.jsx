@@ -26,6 +26,7 @@ const Make = () => {
   const selectedIngredients = useSelector(state => state.order.selectedIngredients)
   const user = useSelector(state => state.user.user) || null;
 
+  const [isLoading, setIsLoading] = useState(false);
   const [isOrderConfirmed, setIsOrderConfirmed] = useState(false);
 
   // 取得當前步驟的食材
@@ -137,10 +138,11 @@ const Make = () => {
 
   const handleClick = async () => {
     if (step === 5) {
+      setIsLoading(true); // 觸發確認訂單按鈕的 loading 效果
       if (isConfirmed) {
         goto3DModelPage();
         return;
-      } 
+      }
       if (user && user.uid) {
         await saveOrderToFirebase()
       }
@@ -168,8 +170,8 @@ const Make = () => {
       ingredients: selectedIngredients,
       createdAt: today,
       name: bentoName,
-      totalKcal: totalKcal, 
-      totalPrice: totalPrice, 
+      totalKcal: totalKcal,
+      totalPrice: totalPrice,
     }
 
     try {
@@ -222,8 +224,16 @@ const Make = () => {
       </div>
       <div className='mb-10 flex justify-around max-w-3/4 w-full mx-auto mt-6 px-4 items-start md:ml-2'>
         <button className='btn btn-outline border-primary text-primary hover:brightness-80 disabled:btn' onClick={handlePrevStep} disabled={step === 1}>上一步</button>
-        <button className={step === 5 ? 'btn btn-success hover:brightness-80' : 'btn btn-primary hover:brightness-80'} onClick={handleClick}>
-          {step === 5 ? "確認訂單" : "下一步"}
+        <button
+          className={step === 5 ? 'btn btn-success hover:brightness-80' : 'btn btn-primary hover:brightness-80'}
+          onClick={handleClick}
+          disabled={isLoading}
+        >
+          {isLoading ? (
+            <span className="loading loading-spinner loading-xs"></span>
+          ) : (
+            step === 5 ? "確認訂單" : "下一步"
+          )}
         </button>
       </div>
     </motion.div>
