@@ -48,7 +48,7 @@ const OrderDetails = ({ isOpen, setIsOpen}) => {
         <ul className="menu text-sm leading-5 md:leading-6">
           {
              Object.values(selectedIngredients).every(arr => arr.length === 0) ? (
-              <p className="text-primary/60">您沒尚未選擇任何食材</p>
+              <p className="text-primary/60">您尚未選擇任何食材</p>
           ) : (
           Object.keys(selectedIngredients)
           .sort((a, b) => Number(a.replace("step", "")) - Number(b.replace("step", "")))
