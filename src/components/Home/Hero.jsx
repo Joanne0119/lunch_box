@@ -45,11 +45,11 @@ const Hero = () => {
         <button className='btn btn-accent text-white hover:brightness-80 text-medium md:mx-3 mx-10 my-2'>
           {
             user ? (
-              <Link to="/make">
+              <Link to="/make" data-testid="hero-make-button-1">
                 開始製作
               </Link>
             ) : (
-              <Link to="/login">
+              <Link to="/login" data-testid="hero-login-button-1">
                 立即登入
               </Link>
             )
@@ -58,11 +58,11 @@ const Hero = () => {
         <button className='btn btn-secondary text-white hover:brightness-80 text-medium md:mx-3 mx-10 my-2'>
           {
             user ? (
-              <a href="#about">
+              <a href="#about" data-testid="hero-about-button-2">
                 了解更多
               </a>
             ) : (
-              <Link to="/make">
+              <Link to="/make" data-testid="hero-make-button-2">
                 開始製作
               </Link>
             )

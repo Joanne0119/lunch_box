@@ -46,11 +46,11 @@ const Feature = () => {
                                     <button className="btn btn-secondary text-white hover:brightness-80 text-medium mt-2">
                                         {
                                             user ? (
-                                                <Link to="/make">
+                                                <Link to="/make" data-testid="feature-make-button">
                                                     開始製作
                                                 </Link>
                                             ) : (
-                                                <Link to="/login">
+                                                <Link to="/login" data-testid="feature-login-button">
                                                     立即登入
                                                 </Link>
                                             )
