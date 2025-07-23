@@ -24,3 +24,7 @@ dist-ssr
 *.sw?
 
 .env
+
+# Test coverage
+/coverage
+.v8-coverage/
